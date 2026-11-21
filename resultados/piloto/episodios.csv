@@ -1,0 +1,121 @@
+tarea,condicion,modelo,iteraciones,resuelta_bucle,resuelta_heldout,truncado,tokens_total,coste_usd,detalle_heldout,repeticion
+P1,A,opencode-go/gpt-6-luna,1,0,1,0,201,6.4e-05,"chi2 = 0.353, p = 0.553, alpha = 0.01",0
+P1,A,opencode-go/gpt-6-luna,1,0,1,0,201,6.4e-05,"chi2 = 0.353, p = 0.553, alpha = 0.01",1
+P1,A,opencode-go/gpt-6-luna,1,0,1,0,207,6.8e-05,"chi2 = 0.353, p = 0.553, alpha = 0.01",2
+P1,A,opencode-go/gpt-6-luna,1,0,1,0,203,6.6e-05,"chi2 = 0.353, p = 0.553, alpha = 0.01",3
+P1,B,opencode-go/gpt-6-luna,1,1,1,0,255,9.2e-05,"chi2 = 0.353, p = 0.553, alpha = 0.01",0
+P1,B,opencode-go/gpt-6-luna,1,1,1,0,195,6.2e-05,"chi2 = 0.353, p = 0.553, alpha = 0.01",1
+P1,B,opencode-go/gpt-6-luna,1,1,1,0,209,6.8e-05,"chi2 = 0.353, p = 0.553, alpha = 0.01",2
+P1,B,opencode-go/gpt-6-luna,1,1,1,0,211,6.9e-05,"chi2 = 0.353, p = 0.553, alpha = 0.01",3
+P1,C,opencode-go/gpt-6-luna,1,1,1,0,187,5.8e-05,"chi2 = 0.353, p = 0.553, alpha = 0.01",0
+P1,C,opencode-go/gpt-6-luna,1,1,1,0,233,8.1e-05,"chi2 = 0.353, p = 0.553, alpha = 0.01",1
+P1,C,opencode-go/gpt-6-luna,1,1,1,0,209,6.8e-05,"chi2 = 0.353, p = 0.553, alpha = 0.01",2
+P1,C,opencode-go/gpt-6-luna,1,1,1,0,209,6.8e-05,"chi2 = 0.353, p = 0.553, alpha = 0.01",3
+P1,A,opencode-go/claude-haiku-5-5,1,0,1,0,377,0.000135,"chi2 = 0.353, p = 0.553, alpha = 0.01",0
+P1,A,opencode-go/claude-haiku-5-5,1,0,1,0,539,0.000216,"chi2 = 0.353, p = 0.553, alpha = 0.01",1
+P1,A,opencode-go/claude-haiku-5-5,1,0,1,0,402,0.000147,"chi2 = 0.353, p = 0.553, alpha = 0.01",2
+P1,A,opencode-go/claude-haiku-5-5,1,0,1,0,523,0.000208,"chi2 = 0.353, p = 0.553, alpha = 0.01",3
+P1,B,opencode-go/claude-haiku-5-5,1,1,1,0,469,0.000181,"chi2 = 0.353, p = 0.553, alpha = 0.01",0
+P1,B,opencode-go/claude-haiku-5-5,1,1,1,0,452,0.000172,"chi2 = 0.353, p = 0.553, alpha = 0.01",1
+P1,B,opencode-go/claude-haiku-5-5,1,1,1,0,398,0.000145,"chi2 = 0.353, p = 0.553, alpha = 0.01",2
+P1,B,opencode-go/claude-haiku-5-5,1,1,1,0,456,0.000174,"chi2 = 0.353, p = 0.553, alpha = 0.01",3
+P1,C,opencode-go/claude-haiku-5-5,1,1,1,0,453,0.000173,"chi2 = 0.353, p = 0.553, alpha = 0.01",0
+P1,C,opencode-go/claude-haiku-5-5,1,1,1,0,485,0.000189,"chi2 = 0.353, p = 0.553, alpha = 0.01",1
+P1,C,opencode-go/claude-haiku-5-5,1,1,1,0,458,0.000175,"chi2 = 0.353, p = 0.553, alpha = 0.01",2
+P1,C,opencode-go/claude-haiku-5-5,1,1,1,0,482,0.000187,"chi2 = 0.353, p = 0.553, alpha = 0.01",3
+P2,A,opencode-go/gpt-6-luna,1,0,1,0,233,8.6e-05,sin referencia independiente: distancia módulo fase global = 0.000e+00 (tolerancia 1e-08),0
+P2,A,opencode-go/gpt-6-luna,1,0,1,0,219,7.9e-05,sin referencia independiente: distancia módulo fase global = 0.000e+00 (tolerancia 1e-08),1
+P2,A,opencode-go/gpt-6-luna,1,0,1,0,225,8.2e-05,sin referencia independiente: distancia módulo fase global = 0.000e+00 (tolerancia 1e-08),2
+P2,A,opencode-go/gpt-6-luna,1,0,1,0,221,8e-05,sin referencia independiente: distancia módulo fase global = 0.000e+00 (tolerancia 1e-08),3
+P2,B,opencode-go/gpt-6-luna,1,1,1,0,217,7.8e-05,sin referencia independiente: distancia módulo fase global = 0.000e+00 (tolerancia 1e-08),0
+P2,B,opencode-go/gpt-6-luna,1,1,1,0,219,7.9e-05,sin referencia independiente: distancia módulo fase global = 0.000e+00 (tolerancia 1e-08),1
+P2,B,opencode-go/gpt-6-luna,1,1,1,0,217,7.8e-05,sin referencia independiente: distancia módulo fase global = 0.000e+00 (tolerancia 1e-08),2
+P2,B,opencode-go/gpt-6-luna,1,1,1,0,221,8e-05,sin referencia independiente: distancia módulo fase global = 0.000e+00 (tolerancia 1e-08),3
+P2,C,opencode-go/gpt-6-luna,1,1,1,0,213,7.6e-05,sin referencia independiente: distancia módulo fase global = 0.000e+00 (tolerancia 1e-08),0
+P2,C,opencode-go/gpt-6-luna,1,1,1,0,219,7.9e-05,sin referencia independiente: distancia módulo fase global = 0.000e+00 (tolerancia 1e-08),1
+P2,C,opencode-go/gpt-6-luna,1,1,1,0,207,7.3e-05,sin referencia independiente: distancia módulo fase global = 0.000e+00 (tolerancia 1e-08),2
+P2,C,opencode-go/gpt-6-luna,1,1,1,0,187,6.3e-05,sin referencia independiente: distancia módulo fase global = 0.000e+00 (tolerancia 1e-08),3
+P2,A,opencode-go/claude-haiku-5-5,1,0,1,0,284,9.7e-05,sin referencia independiente: distancia módulo fase global = 0.000e+00 (tolerancia 1e-08),0
+P2,A,opencode-go/claude-haiku-5-5,1,0,1,0,269,9e-05,sin referencia independiente: distancia módulo fase global = 0.000e+00 (tolerancia 1e-08),1
+P2,A,opencode-go/claude-haiku-5-5,1,0,1,0,320,0.000115,sin referencia independiente: distancia módulo fase global = 0.000e+00 (tolerancia 1e-08),2
+P2,A,opencode-go/claude-haiku-5-5,1,0,1,0,308,0.000109,sin referencia independiente: distancia módulo fase global = 0.000e+00 (tolerancia 1e-08),3
+P2,B,opencode-go/claude-haiku-5-5,1,1,1,0,323,0.000117,sin referencia independiente: distancia módulo fase global = 0.000e+00 (tolerancia 1e-08),0
+P2,B,opencode-go/claude-haiku-5-5,1,1,1,0,289,0.0001,sin referencia independiente: distancia módulo fase global = 0.000e+00 (tolerancia 1e-08),1
+P2,B,opencode-go/claude-haiku-5-5,1,1,1,0,297,0.000104,sin referencia independiente: distancia módulo fase global = 0.000e+00 (tolerancia 1e-08),2
+P2,B,opencode-go/claude-haiku-5-5,1,1,1,0,320,0.000115,sin referencia independiente: distancia módulo fase global = 0.000e+00 (tolerancia 1e-08),3
+P2,C,opencode-go/claude-haiku-5-5,1,1,1,0,307,0.000109,sin referencia independiente: distancia módulo fase global = 0.000e+00 (tolerancia 1e-08),0
+P2,C,opencode-go/claude-haiku-5-5,1,1,1,0,300,0.000105,sin referencia independiente: distancia módulo fase global = 0.000e+00 (tolerancia 1e-08),1
+P2,C,opencode-go/claude-haiku-5-5,1,1,1,0,288,9.9e-05,sin referencia independiente: distancia módulo fase global = 0.000e+00 (tolerancia 1e-08),2
+P2,C,opencode-go/claude-haiku-5-5,1,1,1,0,315,0.000113,sin referencia independiente: distancia módulo fase global = 0.000e+00 (tolerancia 1e-08),3
+P3,A,opencode-go/gpt-6-luna,1,0,1,0,370,0.000141,una sola casilla con masa esperada,0
+P3,A,opencode-go/gpt-6-luna,1,0,1,0,358,0.000135,una sola casilla con masa esperada,1
+P3,A,opencode-go/gpt-6-luna,1,0,1,0,296,0.000104,una sola casilla con masa esperada,2
+P3,A,opencode-go/gpt-6-luna,1,0,1,0,462,0.000187,una sola casilla con masa esperada,3
+P3,B,opencode-go/gpt-6-luna,1,1,1,0,524,0.000218,una sola casilla con masa esperada,0
+P3,B,opencode-go/gpt-6-luna,1,1,1,0,422,0.000167,una sola casilla con masa esperada,1
+P3,B,opencode-go/gpt-6-luna,1,1,1,0,336,0.000124,una sola casilla con masa esperada,2
+P3,B,opencode-go/gpt-6-luna,1,1,1,0,464,0.000188,una sola casilla con masa esperada,3
+P3,C,opencode-go/gpt-6-luna,1,1,1,0,458,0.000185,una sola casilla con masa esperada,0
+P3,C,opencode-go/gpt-6-luna,1,1,1,0,406,0.000159,una sola casilla con masa esperada,1
+P3,C,opencode-go/gpt-6-luna,1,1,1,0,258,8.5e-05,una sola casilla con masa esperada,2
+P3,C,opencode-go/gpt-6-luna,1,1,1,0,454,0.000183,una sola casilla con masa esperada,3
+P3,A,opencode-go/claude-haiku-5-5,1,0,1,0,750,0.000311,una sola casilla con masa esperada,0
+P3,A,opencode-go/claude-haiku-5-5,1,0,1,0,790,0.000331,una sola casilla con masa esperada,1
+P3,A,opencode-go/claude-haiku-5-5,1,0,1,0,789,0.000331,una sola casilla con masa esperada,2
+P3,A,opencode-go/claude-haiku-5-5,1,0,1,0,589,0.00023,una sola casilla con masa esperada,3
+P3,B,opencode-go/claude-haiku-5-5,1,1,1,0,803,0.000338,una sola casilla con masa esperada,0
+P3,B,opencode-go/claude-haiku-5-5,1,1,1,0,911,0.000391,una sola casilla con masa esperada,1
+P3,B,opencode-go/claude-haiku-5-5,1,1,1,0,597,0.000235,una sola casilla con masa esperada,2
+P3,B,opencode-go/claude-haiku-5-5,1,1,1,0,700,0.000286,una sola casilla con masa esperada,3
+P3,C,opencode-go/claude-haiku-5-5,1,1,1,0,873,0.000373,una sola casilla con masa esperada,0
+P3,C,opencode-go/claude-haiku-5-5,1,1,1,0,658,0.000265,una sola casilla con masa esperada,1
+P3,C,opencode-go/claude-haiku-5-5,1,1,1,0,621,0.000246,una sola casilla con masa esperada,2
+P3,C,opencode-go/claude-haiku-5-5,1,1,1,0,603,0.000237,una sola casilla con masa esperada,3
+P4,A,opencode-go/gpt-6-luna,1,0,1,0,294,0.000115,sin referencia independiente: distancia módulo fase global = 0.000e+00 (tolerancia 1e-08),0
+P4,A,opencode-go/gpt-6-luna,1,0,1,0,256,9.6e-05,sin referencia independiente: distancia módulo fase global = 0.000e+00 (tolerancia 1e-08),1
+P4,A,opencode-go/gpt-6-luna,1,0,1,0,254,9.5e-05,sin referencia independiente: distancia módulo fase global = 0.000e+00 (tolerancia 1e-08),2
+P4,A,opencode-go/gpt-6-luna,1,0,1,0,256,9.6e-05,sin referencia independiente: distancia módulo fase global = 0.000e+00 (tolerancia 1e-08),3
+P4,B,opencode-go/gpt-6-luna,1,1,1,0,246,9.1e-05,sin referencia independiente: distancia módulo fase global = 0.000e+00 (tolerancia 1e-08),0
+P4,B,opencode-go/gpt-6-luna,1,1,1,0,248,9.2e-05,sin referencia independiente: distancia módulo fase global = 0.000e+00 (tolerancia 1e-08),1
+P4,B,opencode-go/gpt-6-luna,1,1,1,0,250,9.3e-05,sin referencia independiente: distancia módulo fase global = 0.000e+00 (tolerancia 1e-08),2
+P4,B,opencode-go/gpt-6-luna,1,1,1,0,242,8.9e-05,sin referencia independiente: distancia módulo fase global = 0.000e+00 (tolerancia 1e-08),3
+P4,C,opencode-go/gpt-6-luna,1,1,1,0,232,8.4e-05,sin referencia independiente: distancia módulo fase global = 0.000e+00 (tolerancia 1e-08),0
+P4,C,opencode-go/gpt-6-luna,1,1,1,0,254,9.5e-05,sin referencia independiente: distancia módulo fase global = 0.000e+00 (tolerancia 1e-08),1
+P4,C,opencode-go/gpt-6-luna,1,1,1,0,246,9.1e-05,sin referencia independiente: distancia módulo fase global = 0.000e+00 (tolerancia 1e-08),2
+P4,C,opencode-go/gpt-6-luna,1,1,1,0,272,0.000104,sin referencia independiente: distancia módulo fase global = 0.000e+00 (tolerancia 1e-08),3
+P4,A,opencode-go/claude-haiku-5-5,1,0,1,0,571,0.000236,sin referencia independiente: distancia módulo fase global = 0.000e+00 (tolerancia 1e-08),0
+P4,A,opencode-go/claude-haiku-5-5,1,0,1,0,517,0.000208,sin referencia independiente: distancia módulo fase global = 0.000e+00 (tolerancia 1e-08),1
+P4,A,opencode-go/claude-haiku-5-5,1,0,1,0,513,0.000207,sin referencia independiente: distancia módulo fase global = 0.000e+00 (tolerancia 1e-08),2
+P4,A,opencode-go/claude-haiku-5-5,1,0,1,0,465,0.000182,sin referencia independiente: distancia módulo fase global = 0.000e+00 (tolerancia 1e-08),3
+P4,B,opencode-go/claude-haiku-5-5,1,1,1,0,482,0.000191,sin referencia independiente: distancia módulo fase global = 0.000e+00 (tolerancia 1e-08),0
+P4,B,opencode-go/claude-haiku-5-5,1,1,1,0,482,0.000191,sin referencia independiente: distancia módulo fase global = 0.000e+00 (tolerancia 1e-08),1
+P4,B,opencode-go/claude-haiku-5-5,1,1,1,0,667,0.000284,sin referencia independiente: distancia módulo fase global = 0.000e+00 (tolerancia 1e-08),2
+P4,B,opencode-go/claude-haiku-5-5,1,1,1,0,556,0.000228,sin referencia independiente: distancia módulo fase global = 0.000e+00 (tolerancia 1e-08),3
+P4,C,opencode-go/claude-haiku-5-5,1,1,1,0,647,0.000273,sin referencia independiente: distancia módulo fase global = 0.000e+00 (tolerancia 1e-08),0
+P4,C,opencode-go/claude-haiku-5-5,1,1,1,0,463,0.000181,sin referencia independiente: distancia módulo fase global = 0.000e+00 (tolerancia 1e-08),1
+P4,C,opencode-go/claude-haiku-5-5,1,1,1,0,470,0.000185,sin referencia independiente: distancia módulo fase global = 0.000e+00 (tolerancia 1e-08),2
+P4,C,opencode-go/claude-haiku-5-5,1,1,1,0,477,0.000189,sin referencia independiente: distancia módulo fase global = 0.000e+00 (tolerancia 1e-08),3
+P5,A,opencode-go/gpt-6-luna,1,0,1,0,262,9.3e-05,"chi2 = 38.723, p = 0.16, alpha = 0.01",0
+P5,A,opencode-go/gpt-6-luna,1,0,1,0,256,9e-05,"chi2 = 38.723, p = 0.16, alpha = 0.01",1
+P5,A,opencode-go/gpt-6-luna,1,0,1,0,242,8.3e-05,"chi2 = 38.723, p = 0.16, alpha = 0.01",2
+P5,A,opencode-go/gpt-6-luna,1,0,1,0,260,9.2e-05,"chi2 = 38.723, p = 0.16, alpha = 0.01",3
+P5,B,opencode-go/gpt-6-luna,1,1,1,0,278,0.000101,"chi2 = 38.723, p = 0.16, alpha = 0.01",0
+P5,B,opencode-go/gpt-6-luna,1,1,1,0,258,9.1e-05,"chi2 = 38.723, p = 0.16, alpha = 0.01",1
+P5,B,opencode-go/gpt-6-luna,1,1,1,0,268,9.6e-05,"chi2 = 38.723, p = 0.16, alpha = 0.01",2
+P5,B,opencode-go/gpt-6-luna,1,1,1,0,293,0.000108,"chi2 = 38.723, p = 0.16, alpha = 0.01",3
+P5,C,opencode-go/gpt-6-luna,1,1,1,0,324,0.000124,"chi2 = 38.723, p = 0.16, alpha = 0.01",0
+P5,C,opencode-go/gpt-6-luna,1,1,1,0,304,0.000114,"chi2 = 38.723, p = 0.16, alpha = 0.01",1
+P5,C,opencode-go/gpt-6-luna,1,1,1,0,298,0.000111,"chi2 = 38.723, p = 0.16, alpha = 0.01",2
+P5,C,opencode-go/gpt-6-luna,1,1,1,0,268,9.6e-05,"chi2 = 38.723, p = 0.16, alpha = 0.01",3
+P5,A,opencode-go/claude-haiku-5-5,1,0,1,0,450,0.000167,"chi2 = 38.723, p = 0.16, alpha = 0.01",0
+P5,A,opencode-go/claude-haiku-5-5,1,0,1,0,450,0.000167,"chi2 = 38.723, p = 0.16, alpha = 0.01",1
+P5,A,opencode-go/claude-haiku-5-5,1,0,1,0,547,0.000216,"chi2 = 38.723, p = 0.16, alpha = 0.01",2
+P5,A,opencode-go/claude-haiku-5-5,1,0,1,0,471,0.000178,"chi2 = 38.723, p = 0.16, alpha = 0.01",3
+P5,B,opencode-go/claude-haiku-5-5,1,1,1,0,477,0.000181,"chi2 = 38.723, p = 0.16, alpha = 0.01",0
+P5,B,opencode-go/claude-haiku-5-5,1,1,1,0,456,0.00017,"chi2 = 38.723, p = 0.16, alpha = 0.01",1
+P5,B,opencode-go/claude-haiku-5-5,1,1,1,0,462,0.000173,"chi2 = 38.723, p = 0.16, alpha = 0.01",2
+P5,B,opencode-go/claude-haiku-5-5,1,1,1,0,468,0.000176,"chi2 = 38.723, p = 0.16, alpha = 0.01",3
+P5,C,opencode-go/claude-haiku-5-5,1,1,1,0,471,0.000178,"chi2 = 38.723, p = 0.16, alpha = 0.01",0
+P5,C,opencode-go/claude-haiku-5-5,1,1,1,0,463,0.000174,"chi2 = 38.723, p = 0.16, alpha = 0.01",1
+P5,C,opencode-go/claude-haiku-5-5,1,1,1,0,492,0.000188,"chi2 = 38.723, p = 0.16, alpha = 0.01",2
+P5,C,opencode-go/claude-haiku-5-5,1,1,1,0,424,0.000154,"chi2 = 38.723, p = 0.16, alpha = 0.01",3

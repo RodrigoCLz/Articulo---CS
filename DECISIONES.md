@@ -254,6 +254,16 @@ Regla: ningún cambio a una decisión aprobada se aplica después de congelar el
 - **Decisión tomada por delegación del usuario:** el piloto se ejecutará en cuanto la comprobación de D-32 funcione, dentro del control de 6 USD.
 - **Estado:** BLOQUEADO por la clave.
 
+### D-35 · Resultado del piloto y tope de tokens
+- **Fecha:** 2026-11-21
+- **Ejecución:** `arnes/piloto.py` completo: 120 episodios, 120 llamadas, coste 0,0176 USD a precio de lista. No se detuvo por control. Datos en `resultados/piloto/`.
+- **Tope de tokens (D-02):** tokens por llamada: mediana 322, q95 702, máximo 911. **T = 5 × q95 → 4 000 tokens por episodio.** Con T = 4 000 no se trunca ningún episodio del piloto (`analisis/fijar_tope.py`, `resultados/piloto/tope.md`).
+- **Limitación 1 (grave):** todos los episodios se resolvieron en la primera llamada. El piloto no ejercita reintentos ni el crecimiento del prompt con retroalimentación. El q95 mide solo primeras llamadas. Con prompts que incluyen código previo, las llamadas posteriores serán más largas. **Riesgo:** T puede quedarse corto en tareas difíciles.
+- **Limitación 2 (razonamiento):** GPT-6 Luna produce razonamiento en todas las llamadas. Haiku 5.5 lo produce en 5 o 6 de 20 llamadas por condición: `adaptive` decide cuándo pensar. Esto afecta a H2 (tokens incluyendo razonamiento) y debe declararse.
+- **Estimación de presupuesto (D-02):** la referencia de 3 USD asumía 3 000 tokens de entrada y 1 500 de salida por llamada. El piloto mide 322 tokens por llamada en tareas fáciles. Es una cota superior, pero las tareas reales tendrán más tokens e iteraciones.
+- **Decisión pendiente del usuario:** aceptar T = 4 000 tal como dice la regla, o fijarlo más alto por la limitación 1. Propuesta del asistente: aceptar la regla y registrar el riesgo, porque cambiarla después de ver los datos sería un ajuste a posteriori.
+- **Estado:** RESULTADO REGISTRADO. Pendiente de la decisión sobre T.
+
 ## Pendientes para congelar `prereg-v1`
 
 | ID | Punto | Quién |
