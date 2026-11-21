@@ -63,7 +63,7 @@ Las tres condiciones usan el mismo prompt base, el mismo modelo, la misma varian
 | Repeticiones por tarea y condición | **4** (D-04) |
 | Temperatura | Fija donde el modelo la acepte; los parámetros ignorados se registran (D-07) |
 | Iteraciones máximas por episodio | **5** en B y en C (D-14b) |
-| Tope de tokens por episodio | **Regla fijada ahora, valor tras el piloto:** T = 5 × q95 de tokens por llamada medidos en el piloto, redondeado a miles hacia arriba (D-02). Un episodio que supera T se trunca y cuenta como no resuelto; se reporta el número de truncados por condición. |
+| Tope de tokens por episodio | **T = 20 000 tokens por episodio** (desviación de la regla original, registrada en D-02 y D-36). Un episodio que supera T se trunca y cuenta como no resuelto; se reporta el número de truncados por condición y modelo. |
 | Presupuesto total | **Referencia: ~3 USD a precio de lista** para ~2 800 llamadas (D-02). Si el piloto implica más del doble (~6 USD), la ejecución se detiene y se reporta. El límite de cuota del usuario es desconocido. |
 | Tamaño del experimento | 50 tareas × 3 condiciones × 4 repeticiones × 2 modelos = 1200 episodios *(sin contar piloto ni reintentos)* |
 
@@ -151,7 +151,7 @@ Los resultados se guardan en CSV. Todas las cifras del artículo se regeneran co
 
 ## Puntos PENDIENTES antes de congelar
 
-1. Valor del tope de tokens tras el piloto y comparación con la cuota disponible (D-02). La regla ya está fijada; el valor depende del piloto.
+1. Tope de tokens fijado en T = 20 000 (D-36, desviación de D-02). Pendiente solo de la aprobación de congelación.
 2. Presupuesto para 1200 episodios: el coste sube respecto a 720 episodios (D-02 y D-25).
 3. Instalación real de Qiskit 2.x y Aer en el entorno (D-13). Verificada solo en metadatos.
 

@@ -88,7 +88,7 @@ Regla: ningún cambio a una decisión aprobada se aplica después de congelar el
 - **Presupuesto de referencia:** unos **3 USD** a precio de lista para las ~2 800 llamadas de los dos modelos (supuestos: 3 000 tokens de entrada y 1 500 de salida por llamada, precio base, sin caché). Lo aprueba el usuario como referencia, sin conocer el límite de su cuota.
 - **Control durante el piloto:** si el coste medido por llamada implica un total mayor que **el doble** de la referencia (unos 6 USD), la ejecución se detiene y se reporta antes de la Fase 6.
 - **Límite de cuota:** el usuario no puede compartirlo. Se trata como desconocido, y la referencia de 3 USD es el control.
-- **Estado:** REGLA APROBADA. Referencia de 3 USD APROBADA por el usuario. Valor del tope por episodio PENDIENTE del piloto.
+- **Estado:** REGLA APROBADA. Referencia de 3 USD APROBADA por el usuario. Valor del tope por episodio fijado en D-36 (T = 20 000).
 
 ---
 
@@ -263,6 +263,17 @@ Regla: ningún cambio a una decisión aprobada se aplica después de congelar el
 - **Estimación de presupuesto (D-02):** la referencia de 3 USD asumía 3 000 tokens de entrada y 1 500 de salida por llamada. El piloto mide 322 tokens por llamada en tareas fáciles. Es una cota superior, pero las tareas reales tendrán más tokens e iteraciones.
 - **Decisión pendiente del usuario:** aceptar T = 4 000 tal como dice la regla, o fijarlo más alto por la limitación 1. Propuesta del asistente: aceptar la regla y registrar el riesgo, porque cambiarla después de ver los datos sería un ajuste a posteriori.
 - **Estado:** RESULTADO REGISTRADO. Pendiente de la decisión sobre T.
+
+### D-36 · Tope de tokens por episodio: T = 20 000 (desviación de D-02)
+- **Fecha:** 2026-11-21
+- **Decisión:** T = 20 000 tokens por episodio, en lugar de T = 4 000 que resultaba de la regla 5 × q95 del piloto.
+- **Motivos:**
+  1. El piloto no ejercitó reintentos (120 de 120 episodios resueltos en la primera llamada). Su q95 no representa las llamadas posteriores, que incluyen el código anterior y el error.
+  2. Con T = 4 000, un episodio de C o B con varias llamadas se truncaría con facilidad y contaría como no resuelto. Eso sesga H1 a favor de A (una sola llamada) y convierte el tope en un artefacto de la comparación.
+  3. El coste no es la restricción: 0,0176 USD para 120 episodios del piloto, muy por debajo de la referencia de 3 USD. El tope solo debe impedir ejecuciones descontroladas.
+- **Consecuencia:** el valor no sale de la regla original. Se declara como desviación en el preregistro antes de la Fase 6. No se usan los datos de los episodios del experimento para ajustarlo.
+- **Verificación prevista:** reportar cuántos episodios se truncan con T por condición y modelo. Si alguno se acerca a T, se declara.
+- **Estado:** APROBADA por el usuario (2026-11-21).
 
 ## Pendientes para congelar `prereg-v1`
 
