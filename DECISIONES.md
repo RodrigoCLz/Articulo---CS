@@ -275,6 +275,13 @@ Regla: ningún cambio a una decisión aprobada se aplica después de congelar el
 - **Verificación prevista:** reportar cuántos episodios se truncan con T por condición y modelo. Si alguno se acerca a T, se declara.
 - **Estado:** APROBADA por el usuario (2026-11-21).
 
+### D-37 · Ejecutor de la Fase 6 añadido después de `prereg-v1`
+- **Fecha:** 2026-11-21
+- **Hecho:** `arnes/experimento.py` ejecuta las 50 tareas × 3 condiciones × 2 modelos × 4 repeticiones = 1 200 episodios. Muestra progreso, guarda cada episodio y cada llamada al terminarlos, puede reanudarse y se detiene si el coste supera 6 USD. Escribe `metadatos.json` con el commit, las versiones y los parámetros.
+- **Efecto sobre el diseño:** ninguno. Usa los parámetros congelados: T = 20 000 (D-36), 4 repeticiones, semillas de bucle y condiciones del preregistro.
+- **Por qué se añadió después:** el ejecutor no existía al congelar. El tag `prereg-v1` no se mueve.
+- **Estado:** REGISTRO.
+
 ## Pendientes para congelar `prereg-v1`
 
 | ID | Punto | Quién |
