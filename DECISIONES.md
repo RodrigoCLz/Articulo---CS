@@ -219,13 +219,13 @@ Regla: ningún cambio a una decisión aprobada se aplica después de congelar el
 - **Fecha:** 2026-11-21
 - **Decisión:** los enunciados que se envían a los modelos están en inglés. El código y los identificadores también. El artículo sigue en español.
 - **Motivo:** los modelos y las APIs de Qiskit están documentados en inglés; el idioma del prompt es una variable que conviene fijar en el preregistro.
-- **Estado:** PROPUESTA POR ASISTENTE. Pendiente de confirmación.
+- **Estado:** APROBADA por el usuario (2026-11-21).
 
 ### D-30 · Nivel α con una sola prueba por programa
 - **Fecha:** 2026-11-21
 - **Decisión:** α = 0,01 es el nivel por programa. Si un programa aplica n pruebas, cada una usa 0,01/n (Bonferroni). Las tareas de distribución aplican una sola chi-cuadrado, así que su α es 0,01.
 - **Interpretación:** el preregistro dice "α = 0,01 por prueba con Bonferroni por programa". Se implementa como nivel familiar por programa dividido entre pruebas. Si se quiere otra lectura, se cambia aquí antes de congelar.
-- **Estado:** PROPUESTA POR ASISTENTE. Pendiente de confirmación.
+- **Estado:** APROBADA por el usuario (2026-11-21). Lectura: 0,01 es el nivel por programa; con una prueba por programa el valor efectivo es 0,01.
 
 ### D-31 · Limitaciones de las tareas de distribución
 - **Fecha:** 2026-11-21
@@ -233,12 +233,26 @@ Regla: ningún cambio a una decisión aprobada se aplica después de congelar el
 - **Consecuencia:** H1 y H3 se miden sobre lo que el criterio ve. Se declara en el artículo.
 - **Estado:** REGISTRO DE LIMITACIÓN.
 
-### D-32 · Transporte HTTP pendiente de verificación
+### D-32 · Transporte HTTP
 - **Fecha:** 2026-11-21
-- **Hecho:** cliente (`arnes/cliente.py`), episodios A/B/C (`arnes/episodio.py`) y suite reservada (`arnes/heldout.py`), probados con un transporte simulado. No se ha llamado a ningún modelo.
-- **Pendiente [VERIFICAR]:** el endpoint de OpenCode Go para cada modelo, y cómo se pasa `medium` (en el log aparece `Reasoning: adaptive` en la sesión interactiva; el parámetro del API no está verificado). Hasta entonces, `TransporteSinConfigurar` falla de forma explícita.
-- **Claves:** se leerán solo de variables de entorno cuando exista el transporte.
-- **Estado:** REGISTRO. Hay que verificar el endpoint antes de la Fase 5.
+- **Verificado en la documentación (no en una llamada):** base `https://opencode.ai/inference/go`. Catálogo `https://opencode.ai/inference/go/v1/models` y página de Go. GPT-6 Luna: API Responses en `/openai/v1/responses`, con `reasoning.effort` (valores incluyen `medium`). Claude Haiku 5.5: API Messages en `/anthropic/v1/messages`, con `thinking: {type: adaptive}` y `output_config.effort`. Haiku 5.5 no admite `temperature`. Ver también la guía de Anthropic: los modelos 4.7 o posteriores rechazan `budget_tokens`.
+- **Cabeceras requeridas por OpenCode Go:** User-Agent propio (`articulo-arnes/0.1`) y `x-opencode-session` estable por conversación. Implementado en `arnes/transporte.py`.
+- **Pendiente [VERIFICAR] con una llamada real:** que el gateway acepta `x-api-key` en Haiku y `Authorization: Bearer` en GPT, y que `temperature: 0` se acepta en GPT-6 Luna. Se confirma con `python -m arnes.comprobar` (una petición mínima por modelo).
+- **Claves:** solo variable de entorno `OPENCODE_GO_API_KEY`. No está definida en este entorno; la comprobación falla con mensaje claro si falta.
+- **Estado:** IMPLEMENTADO Y PROBADO CON TRANSPORTE SIMULADO. Pendiente de comprobación real.
+
+### D-33 · Retención de datos de los proveedores (limitación)
+- **Fecha:** 2026-11-21
+- **Hallazgo (documentación de OpenCode Go, Privacy):** GPT-6 Luna y Claude Haiku 5.5 retienen las peticiones 30 días para monitoreo de abuso. Las tareas son originales y no contienen datos personales, pero el artículo debe declararlo.
+- **Acción del usuario:** comprobar en Settings › Privacy del workspace que el ajuste por defecto (sin endpoints que entrenen con los datos) sigue activo.
+- **Estado:** REGISTRO DE LIMITACIÓN.
+
+### D-34 · Piloto: estado
+- **Fecha:** 2026-11-21
+- **Hecho:** 5 tareas fuera del catálogo (`tareas/piloto.py`, P1 a P5, con pruebas unitarias). Ejecutor (`arnes/piloto.py`) con control de coste de 6 USD (precio de lista, tramos base y alto de cada modelo) y registro por llamada.
+- **Bloqueado:** no se ha ejecutado. Falta la clave `OPENCODE_GO_API_KEY` en el entorno.
+- **Decisión tomada por delegación del usuario:** el piloto se ejecutará en cuanto la comprobación de D-32 funcione, dentro del control de 6 USD.
+- **Estado:** BLOQUEADO por la clave.
 
 ## Pendientes para congelar `prereg-v1`
 
