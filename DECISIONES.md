@@ -233,6 +233,13 @@ Regla: ningún cambio a una decisión aprobada se aplica después de congelar el
 - **Consecuencia:** H1 y H3 se miden sobre lo que el criterio ve. Se declara en el artículo.
 - **Estado:** REGISTRO DE LIMITACIÓN.
 
+### D-32 · Transporte HTTP pendiente de verificación
+- **Fecha:** 2026-11-21
+- **Hecho:** cliente (`arnes/cliente.py`), episodios A/B/C (`arnes/episodio.py`) y suite reservada (`arnes/heldout.py`), probados con un transporte simulado. No se ha llamado a ningún modelo.
+- **Pendiente [VERIFICAR]:** el endpoint de OpenCode Go para cada modelo, y cómo se pasa `medium` (en el log aparece `Reasoning: adaptive` en la sesión interactiva; el parámetro del API no está verificado). Hasta entonces, `TransporteSinConfigurar` falla de forma explícita.
+- **Claves:** se leerán solo de variables de entorno cuando exista el transporte.
+- **Estado:** REGISTRO. Hay que verificar el endpoint antes de la Fase 5.
+
 ## Pendientes para congelar `prereg-v1`
 
 | ID | Punto | Quién |
