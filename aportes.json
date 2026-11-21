@@ -1,0 +1,44 @@
+{
+  "1-Benchmarking_the_Benchmarks_for_Quantum_Code_Generation_with_LLMs": {
+    "aporte": "Revisa los benchmarks de generación de código cuántico y los unifica en cuatro dimensiones (validez sintáctica/API, corrección semántica y física, viabilidad de recursos y feedback de ejecución), proponiendo una lista de verificación mínima para reportar resultados."
+  },
+  "2-Quantum-Rag_Retrieval-Augmented_Generation_Framework_for_Quantum_Circuit_Code_Generation": {
+    "aporte": "Propone Quantum-RAG, un pipeline de tres etapas que indexa documentación, notebooks y literatura para aumentar un LLM especializado; mejora la generación de circuitos Qiskit sobre Qiskit HumanEval."
+  },
+  "3": {
+    "aporte": "Define una transformación modelo-a-texto (Epsilon/EGL) que genera código Python y Qiskit desde modelos UML extendidos, cubriendo la fase de ingeniería directa en la modernización de sistemas híbridos clásico-cuánticos; validada con 7 casos."
+  },
+  "4-QuanBench_Benchmarking_Quantum_Code_Generation_with_Large_Language_Models": {
+    "aporte": "Presenta QuanBench, un benchmark de 44 tareas evaluadas por corrección funcional (Pass@K) y equivalencia semántica cuántica (Process Fidelity); los LLM evaluados no superan el 40% de acierto."
+  },
+  "5-PennyCoder_Efficient_Domain-Specific_LLMs_for_PennyLane-Based_Quantum_Code_Generation": {
+    "aporte": "Desarrolla PennyCoder, un LLM ligero (LLaMA 3.1-8B con LoRA e instrucciones de dominio) desplegable localmente para generar código PennyLane sin depender de APIs remotas, con mejoras en sintaxis y tareas de QML/QRL."
+  },
+  "6-QHackBench_Benchmarking_Large_Language_Models_for_Quantum_Code_Generation_Using_PennyLane_Hackathon_Challenges": {
+    "aporte": "Introduce QHackBench, un benchmark construido con retos reales del hackathon QHack, y compara prompting estándar frente a RAG; el RAG no mejora de forma clara en los algoritmos complejos."
+  },
+  "7-Model-Driven_Quantum_Code_Generation_Using_Large_Language_Models_and_Retrieval-Augmented_Generation": {
+    "aporte": "Explora la generación de código cuántico desde modelos UML combinando LLM y RAG con ejemplos de Qiskit de GitHub; prompts bien diseñados multiplican hasta por cuatro el CodeBLEU."
+  },
+  "8-Enhancing_LLM-based_Quantum_Code_Generation_with_Multi-Agent_Optimization_and_Quantum_Error_Correction": {
+    "aporte": "Propone el primer framework multi-agente para generar código cuántico tolerante a fallos: agentes especializados en corrección de errores cuánticos que refinan el código mediante análisis semántico iterativo."
+  },
+  "9-Quantum-Aware_Large_Language_Models_Taxonomy_Architectures_and_Future_Applications": {
+    "aporte": "Survey que organiza la intersección entre computación cuántica y LLM: generación automática de código cuántico, arquitecturas transformer híbridas y procesamiento de lenguaje natural cuántico (QNLP), con modelos, benchmarks y aplicaciones."
+  },
+  "10-Qiskit_HumanEval_An_Evaluation_Benchmark_for_Quantum_Code_Generative_Models": {
+    "aporte": "Publica Qiskit HumanEval, un conjunto curado de más de 100 tareas con prompt, solución canónica, tests y escala de dificultad, y evalúa la capacidad de los LLM de producir código Qiskit ejecutable."
+  },
+  "11": {
+    "aporte": "Presenta una arquitectura de ejecución clásico-cuántica con generación de código en runtime y el concepto de futures, implementada en el framework Ket (lenguaje embebido en Python, librería C++ Libket y simulador bitwise)."
+  },
+  "2023_aspdac_equivalence_checking_parameterized_quantum_circuits": {
+    "doi": "10.1145/3566097.3567932"
+  },
+  "Quito_ a Coverage-Guided Test Generator for Quantum ProgramsQuito_ a Coverage-Guided Test Generator for Quantum Programs - wang2021": {
+    "doi": "10.1109/ASE51524.2021.9678798"
+  },
+  "QuraTest_ Integrating Quantum Specific Features in Quantum Program Testing - ASE56229.2023.00196": {
+    "doi": "10.1109/ASE56229.2023.00196"
+  }
+}
