@@ -215,6 +215,24 @@ Regla: ningún cambio a una decisión aprobada se aplica después de congelar el
 
 ---
 
+### D-29 · Enunciados de las tareas en inglés
+- **Fecha:** 2026-11-21
+- **Decisión:** los enunciados que se envían a los modelos están en inglés. El código y los identificadores también. El artículo sigue en español.
+- **Motivo:** los modelos y las APIs de Qiskit están documentados en inglés; el idioma del prompt es una variable que conviene fijar en el preregistro.
+- **Estado:** PROPUESTA POR ASISTENTE. Pendiente de confirmación.
+
+### D-30 · Nivel α con una sola prueba por programa
+- **Fecha:** 2026-11-21
+- **Decisión:** α = 0,01 es el nivel por programa. Si un programa aplica n pruebas, cada una usa 0,01/n (Bonferroni). Las tareas de distribución aplican una sola chi-cuadrado, así que su α es 0,01.
+- **Interpretación:** el preregistro dice "α = 0,01 por prueba con Bonferroni por programa". Se implementa como nivel familiar por programa dividido entre pruebas. Si se quiere otra lectura, se cambia aquí antes de congelar.
+- **Estado:** PROPUESTA POR ASISTENTE. Pendiente de confirmación.
+
+### D-31 · Limitaciones de las tareas de distribución
+- **Fecha:** 2026-11-21
+- **Hallazgo:** en las tareas de estado (preparación de Bell, GHZ, teleportación y codificación densa), el criterio de distribución compara solo la base computacional o la base X fijada en la referencia. Un error de fase que no cambie esas distribuciones no se detecta.
+- **Consecuencia:** H1 y H3 se miden sobre lo que el criterio ve. Se declara en el artículo.
+- **Estado:** REGISTRO DE LIMITACIÓN.
+
 ## Pendientes para congelar `prereg-v1`
 
 | ID | Punto | Quién |
