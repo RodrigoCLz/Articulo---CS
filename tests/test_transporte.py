@@ -43,10 +43,12 @@ def test_responses_envia_ruta_y_esfuerzo_medium(monkeypatch):
     assert c["url"] == "https://opencode.ai/inference/go/openai/v1/responses"
     assert c["body"]["model"] == "gpt-6-luna"
     assert c["body"]["reasoning"] == {"effort": "medium"}
+    assert "temperature" not in c["body"]
     assert c["headers"]["authorization"] == "Bearer clave-de-prueba"
     assert c["headers"]["x-opencode-session"] == "ses_x"
     assert c["headers"]["user-agent"] == T.USER_AGENT
     assert r.texto == "OK" and r.tokens_razonamiento == 3 and r.tokens_salida == 5
+    assert r.parametros_ignorados == ("temperature",)
 
 
 def test_messages_usa_adaptive_y_sin_temperature(monkeypatch):

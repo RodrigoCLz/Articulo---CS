@@ -4,7 +4,8 @@ Rutas y parámetros según la documentación de OpenCode Go y el catálogo públ
 (consultados el 2026-11-21):
 - gpt-6-luna: API Responses, POST {BASE}/openai/v1/responses, reasoning.effort = medium.
 - claude-haiku-5-5: API Messages, POST {BASE}/anthropic/v1/messages, thinking adaptive +
-  output_config.effort = medium. Sin temperature: el modelo no la admite.
+  output_config.effort = medium. Sin temperature: ninguno de los dos modelos la acepta
+  (verificado: GPT-6 Luna devuelve HTTP 400 y Haiku 5.5 no la admite en la documentación).
 
 Lo que NO está verificado con una llamada real queda marcado [VERIFICAR] y se confirma con la
 llamada de comprobación (arnes/comprobar.py) antes del piloto.
@@ -80,7 +81,6 @@ class TransporteOpenCodeGo:
             "model": nombre,
             "input": prompt,
             "reasoning": {"effort": variante},
-            "temperature": 0,
             "max_output_tokens": MAX_SALIDA,
         }
         d = self._post(f"{BASE}/openai/v1/responses", {"authorization": f"Bearer {clave}"}, cuerpo)
@@ -102,6 +102,7 @@ class TransporteOpenCodeGo:
             tokens_razonamiento=det_out.get("reasoning_tokens", 0),
             tokens_cache_lectura=det_in.get("cached_tokens", 0),
             tokens_cache_escritura=0,
+            parametros_ignorados=("temperature",),
         )
 
     def _messages(self, nombre: str, variante: str, prompt: str) -> Respuesta:

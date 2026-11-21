@@ -237,7 +237,7 @@ Regla: ningún cambio a una decisión aprobada se aplica después de congelar el
 - **Fecha:** 2026-11-21
 - **Verificado en la documentación (no en una llamada):** base `https://opencode.ai/inference/go`. Catálogo `https://opencode.ai/inference/go/v1/models` y página de Go. GPT-6 Luna: API Responses en `/openai/v1/responses`, con `reasoning.effort` (valores incluyen `medium`). Claude Haiku 5.5: API Messages en `/anthropic/v1/messages`, con `thinking: {type: adaptive}` y `output_config.effort`. Haiku 5.5 no admite `temperature`. Ver también la guía de Anthropic: los modelos 4.7 o posteriores rechazan `budget_tokens`.
 - **Cabeceras requeridas por OpenCode Go:** User-Agent propio (`articulo-arnes/0.1`) y `x-opencode-session` estable por conversación. Implementado en `arnes/transporte.py`.
-- **Pendiente [VERIFICAR] con una llamada real:** que el gateway acepta `x-api-key` en Haiku y `Authorization: Bearer` en GPT, y que `temperature: 0` se acepta en GPT-6 Luna. Se confirma con `python -m arnes.comprobar` (una petición mínima por modelo).
+- **Comprobación real (2026-11-21):** Haiku 5.5 responde OK con `x-api-key`, variante `medium` y sin `temperature`. GPT-6 Luna devolvió HTTP 400 (`temperature` no soportado); se quitó de la petición y se registra como parámetro ignorado. **Pendiente:** repetir `python -m arnes.comprobar` para confirmar GPT-6 Luna sin temperatura.
 - **Claves:** solo variable de entorno `OPENCODE_GO_API_KEY`. No está definida en este entorno; la comprobación falla con mensaje claro si falta.
 - **Estado:** IMPLEMENTADO Y PROBADO CON TRANSPORTE SIMULADO. Pendiente de comprobación real.
 
