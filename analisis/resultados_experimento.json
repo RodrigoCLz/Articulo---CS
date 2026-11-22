@@ -1,0 +1,104 @@
+{
+  "modelos": {
+    "opencode-go/claude-haiku-5-5": {
+      "C-B": {
+        "media": 0.025,
+        "ic_lo": 0.0,
+        "ic_hi": 0.055
+      },
+      "C-A": {
+        "media": 0.045,
+        "ic_lo": 0.01,
+        "ic_hi": 0.085
+      },
+      "B-A": {
+        "media": 0.02,
+        "ic_lo": -0.015,
+        "ic_hi": 0.055
+      },
+      "H1_apoyo": false,
+      "tasa": {
+        "A": 0.945,
+        "B": 0.965,
+        "C": 0.99
+      }
+    },
+    "opencode-go/gpt-6-luna": {
+      "C-B": {
+        "media": 0.05,
+        "ic_lo": 0.005,
+        "ic_hi": 0.105
+      },
+      "C-A": {
+        "media": 0.05,
+        "ic_lo": 0.01,
+        "ic_hi": 0.1
+      },
+      "B-A": {
+        "media": 0.0,
+        "ic_lo": -0.035,
+        "ic_hi": 0.035
+      },
+      "H1_apoyo": false,
+      "tasa": {
+        "A": 0.94,
+        "B": 0.94,
+        "C": 0.99
+      }
+    }
+  },
+  "pooled": {
+    "C-B": {
+      "media": 0.0375,
+      "ic_lo": 0.0125,
+      "ic_hi": 0.0675,
+      "p": 0.0078
+    },
+    "C-A": {
+      "media": 0.0475,
+      "ic_lo": 0.0175,
+      "ic_hi": 0.08,
+      "p": 0.001,
+      "p_holm": 0.002
+    },
+    "B-A": {
+      "media": 0.01,
+      "ic_lo": -0.0175,
+      "ic_hi": 0.0375,
+      "p": 0.5436,
+      "p_holm": 0.5436
+    },
+    "H1_apoyo": false
+  },
+  "n_episodios": 1200,
+  "H1_soporte": "no apoyada",
+  "H2": {
+    "opencode-go/claude-haiku-5-5": {
+      "razon": 1.016732824427481,
+      "ic_lo": 0.8883660584815888,
+      "ic_hi": 1.2062603305785125,
+      "H2_apoyo": true
+    },
+    "opencode-go/gpt-6-luna": {
+      "razon": 1.0882805290679791,
+      "ic_lo": 0.7656836461126005,
+      "ic_hi": 1.3726851851851851,
+      "H2_apoyo": true
+    },
+    "agregado": {
+      "razon": 1.0395558639833449,
+      "ic_lo": 0.9110996474937667,
+      "ic_hi": 1.3688734860413767,
+      "H2_apoyo": true
+    }
+  },
+  "truncados": {
+    "opencode-go/claude-haiku-5-5|A": 0,
+    "opencode-go/claude-haiku-5-5|B": 0,
+    "opencode-go/claude-haiku-5-5|C": 2,
+    "opencode-go/gpt-6-luna|A": 0,
+    "opencode-go/gpt-6-luna|B": 0,
+    "opencode-go/gpt-6-luna|C": 2
+  },
+  "coste_usd": 1.1766
+}

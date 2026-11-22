@@ -282,6 +282,17 @@ Regla: ningún cambio a una decisión aprobada se aplica después de congelar el
 - **Por qué se añadió después:** el ejecutor no existía al congelar. El tag `prereg-v1` no se mueve.
 - **Estado:** REGISTRO.
 
+### D-38 · Resultado confirmatorio del experimento (2026-11-22)
+- **Datos:** 1 200 episodios, sin duplicados, coste 1,18 USD a precio de lista, 4 truncados (2 por modelo en C).
+- **H1 (C − B, agregada):** diferencia +0,037, IC95% [+0,013, +0,068]. **No cumple** el criterio de ≥ 0,10. Soporte: **no apoyada**. Por modelo: Haiku +0,025 [0,000, +0,055]; GPT-6 Luna +0,050 [+0,005, +0,105]. Ninguno cumple el umbral.
+- **Secundarias (Holm):** C − A +0,048, p Holm = 0,002. B − A +0,010, p Holm = 0,544.
+- **Causa principal: efecto techo.** B resuelve ~94–97 % de las tareas. Con B en ese nivel, la ganancia máxima posible sobre B es de ~5 puntos. El preregistro (§6) asumió bases de 40–70 % para calcular la potencia (D-25). **El diseño no podía detectar 10 puntos con este conjunto de tareas.** Es un resultado negativo que se reporta tal cual; no se cambia el criterio después de ver los datos.
+- **H2 (costo):** razón de medianas C / B = 1,04 agregada [0,91, 1,37]; por modelo 1,02 (Haiku) y 1,09 (GPT). **Cumple** (≤ 2).
+- **H3:** no calculado. **Pregunta abierta:** el preregistro no define con precisión qué suite de pruebas se mide ni con qué mutantes (§9 y D-19 mencionan suites de C y de solo ejecución, pero no bastan para calcular la métrica). No se define ahora para no ajustar el criterio a los datos. Requiere decisión del usuario y, si cambia la definición, una desviación registrada.
+- **Limitación adicional:** los 4 truncados cuentan como no resueltos (D-36). No afectan a la conclusión: el resultado de C − B no cambia de signo aunque se resolvieran.
+- **Script:** `analisis/analizar_experimento.py` → `resultados/experimento/analisis.md`.
+- **Estado:** RESULTADO REGISTRADO.
+
 ## Pendientes para congelar `prereg-v1`
 
 | ID | Punto | Quién |

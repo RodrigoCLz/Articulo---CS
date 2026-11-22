@@ -1,0 +1,16 @@
+{
+  "fecha_inicio_utc": "2026-11-21T23:59:30+00:00",
+  "commit_arnes": "127280982bd9a709b97765cc4420e4491222d7ff",
+  "python": "3.14.10",
+  "qiskit": "2.6.2",
+  "qiskit_aer": "0.18.4",
+  "modelos": [
+    "opencode-go/gpt-6-luna",
+    "opencode-go/claude-haiku-5-5"
+  ],
+  "variante": "medium",
+  "repeticiones": 4,
+  "tope_tokens": 20000,
+  "tope_control_usd": 6.0,
+  "seed_bucle_base": 20261121
+}
