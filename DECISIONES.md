@@ -309,6 +309,12 @@ Regla: ningún cambio a una decisión aprobada se aplica después de congelar el
 - **Archivos:** `resultados/experimento/h3.md`, `analisis/resultados_h3.json`, `resultados/experimento/exploratorio_categorias.md`.
 - **Estado:** RESULTADOS REGISTRADOS. Análisis de sensibilidad (regresión mixta, D-17) pendiente.
 
+### D-41 · Sensibilidad de H1 y desviación en el modelo mixto (2026-11-22)
+- **Desviación:** D-17 pedía regresión logística mixta con efecto aleatorio de tarea. `statsmodels` no tiene un GLMM logístico frecuentista. Se usa `BinomialBayesMixedGLM` (aproximación variacional, bayesiana). Es un resultado aproximado: sus intervalos pueden ser más estrechos que los verdaderos. Se complementa con un GEE logístico con estructura intercambiable por tarea, que es frecuentista.
+- **Resultado:** efecto de C frente a B en logit: +1,85 [+0,88; +2,81] (mixto) y +1,60 [+0,33; +2,87] (GEE). Diferencia de probabilidad aproximada: +0,040 y +0,038. **Ninguno cumple** el umbral de 10 puntos, y ambos coinciden con el análisis principal.
+- **Archivos:** `analisis/sensibilidad_mixta.py`, `resultados/experimento/sensibilidad.md`. `requirements.lock.txt` añade `statsmodels`.
+- **Estado:** RESULTADO REGISTRADO. Análisis de la Fase 7 completo.
+
 ## Pendientes para congelar `prereg-v1`
 
 | ID | Punto | Quién |
