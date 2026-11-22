@@ -5,6 +5,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{amsmath}
 \usepackage{booktabs}
+\usepackage{graphicx}
 \usepackage{cite}
 \usepackage{url}
 
@@ -22,10 +23,10 @@
 Los agentes basados en modelos de lenguaje generan circuitos cuánticos con frecuencia, pero no siempre están
 correctos. Estudiamos si la retroalimentación de verificación en el bucle mejora la corrección frente a
 un bucle que solo recibe errores de ejecución. Comparamos tres condiciones, con preregistro: una pasada (A),
-reintentos con errores de ejecución (B) y reintentos con pruebas de verificación (C). Evaluamos 50 tareas
+reintentos con errores de ejecución (B) y reintentos con pruebas de verificación (C). En B ningún episodio reintentó, así que B equivale en la práctica a una pasada con comprobación de ejecución. Evaluamos 50 tareas
 propias, dos modelos y cuatro repeticiones, con 1\,200 episodios evaluados en una suite reservada.
-La verificación mejora la corrección de C frente a B en 3,7 puntos porcentuales (IC95\% [1,3; 6,8]),
-por debajo del umbral preregistrado de 10 puntos. El coste en tokens de C frente a B es similar (razón de
+La verificación mejora la corrección de C frente a B en 3,7 puntos porcentuales (IC95\% [1,3; 6,8]) y frente a A en 4,8 puntos,
+por debajo del umbral preregistrado de 10 puntos frente a B. El coste en tokens de C frente a B es similar (razón de
 medianas 1,04). La suite de verificación detecta el 69,6\% de los mutantes no equivalentes, frente al 0\% de
 la comprobación de solo ejecución. El efecto techo explica buena parte del resultado: B ya resuelve el 95\% de
 las tareas. Declaramos el resultado negativo y sus límites.
@@ -42,7 +43,7 @@ Un error de fase o de compuerta puede pasar la ejecución sin fallar, y solo se 
 distribución de salida o la unitaria con una referencia~\cite{quito, quratest}.
 
 Preguntamos si un agente que verifica su propio código mejora la corrección frente a un agente que solo
-recibe errores de ejecución. Nuestro aporte es un diseño preregistrado, un arnés reproducible y un resultado
+recibe errores de ejecución, y frente a una sola pasada. Nuestro aporte es un diseño preregistrado, un arnés reproducible y un resultado
 negativo sobre el tamaño del efecto. No afirmamos novedad absoluta: trabajos cercanos combinan LLM y
 evaluación en bucle en otros dominios~\cite{funsearch} o en código cuántico con contexto multiagente~\cite{multiagente_qec}.
 
@@ -58,8 +59,8 @@ Para verificación de circuitos, Wei et al.~\cite{wei_dac} estudian la escalabil
 \subsection{Condiciones}
 \begin{itemize}
 \item \textbf{A}: una sola pasada, sin retroalimentación.
-\item \textbf{B}: reintentos hasta que el código ejecuta con el número de qubits correcto. La retroalimentación es el error de ejecución.
-\item \textbf{C}: reintentos hasta que pasa las pruebas del bucle: equivalencia de unitarias (hasta 8 qubits, tolerancia $10^{-8}$ módulo fase global), chi-cuadrado sobre distribuciones (8\,192 shots, $\alpha = 0{,}01$) y ejecución. La retroalimentación indica qué prueba falló.
+\item \textbf{B}: hasta cinco iteraciones con retroalimentación del error de ejecución; termina cuando el código ejecuta con el número de qubits correcto. En el experimento, B terminó siempre en la primera iteración.
+\item \textbf{C}: hasta cinco iteraciones con retroalimentación de las pruebas del bucle: equivalencia de unitarias (hasta 8 qubits, tolerancia $10^{-8}$ módulo fase global), chi-cuadrado sobre distribuciones (8\,192 shots, $\alpha = 0{,}01$ con corrección de Bonferroni) y ejecución. La retroalimentación indica qué prueba falló. El preregistro también incluía comprobaciones estáticas y aserciones dinámicas; no se implementaron (ver Limitaciones).
 \end{itemize}
 Todas las condiciones usan el mismo prompt base, los mismos modelos, la variante de razonamiento \texttt{medium} y un máximo de cinco iteraciones.
 Un episodio que supera 20\,000 tokens se trunca y cuenta como no resuelto (desviación registrada en el preregistro).
@@ -74,56 +75,105 @@ Las tareas variacionales y QAOA no tienen referencia independiente, y se declara
 \subsection{Análisis}
 La unidad de análisis es la tarea. Usamos bootstrap pareado sobre tareas con 10\,000 remuestreos, corrección de Holm
 en las secundarias, y dos modelos de sensibilidad: logística mixta con efecto aleatorio por tarea (aproximación variacional)
-y GEE logístico con estructura intercambiable.
+y GEE logístico con estructura intercambiable. Como métricas complementarias reportamos pass@2 y pass@4 (estimador de Chen et al., con n = 4),
+iteraciones, tokens por tipo y coste por solución correcta.
 
 \section{Resultados}
 \subsection{Corrección (H1)}
-La Tabla~\ref{tab:h1} resume las comparaciones pareadas. El efecto de C frente a B es de 3,7 puntos, con IC95\% [1,3; 6,8].
+La Tabla~\ref{tab:h1} y la Figura~\ref{fig:dif} resumen las comparaciones pareadas. El efecto de C frente a B es de 3,7 puntos, con IC95\% [1,3; 6,8].
 No se cumple el criterio de 10 puntos. Los dos modelos de sensibilidad dan un efecto de 4 puntos.
+Frente a A, la diferencia de C es de 4,8 puntos (p de Holm = 0,002) y la de B es de 1,0 punto (p de Holm = 0,544).
 
 \begin{table}[t]
 \centering
-\caption{Diferencias de pass@1 entre condiciones (agregado sobre modelos).}
+\caption{Diferencias de pass@1 entre condiciones (agregado sobre modelos, bootstrap sobre tareas).}
 \label{tab:h1}
-\begin{tabular}{lccc}
-\toprule
-Comparación & Diferencia & IC95\% & p (Holm) \\
-\midrule
-C $-$ B (primaria) & $+0{,}037$ & $[+0{,}013; +0{,}068]$ & --- \\
-C $-$ A & $+0{,}048$ & $[+0{,}018; +0{,}080]$ & $0{,}002$ \\
-B $-$ A & $+0{,}010$ & $[-0{,}018; +0{,}037]$ & $0{,}544$ \\
-\bottomrule
-\end{tabular}
+\input{tablas/h1}
 \end{table}
 
-\subsection{Coste (H2)}
-La razón de medianas de tokens C/B es 1,04 [0,91; 1,37]. Cumple el criterio de 2. El coste total del experimento fue de 1,18 USD a precio de lista.
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figuras/diferencias.pdf}
+\caption{Diferencias pareadas de pass@1 con IC95\%. La línea discontinua marca el umbral preregistrado de 10 puntos.}
+\label{fig:dif}
+\end{figure}
+
+\subsection{Tasas de resolución}
+La Figura~\ref{fig:tasas} muestra la tasa de resolución por condición y modelo. Todas las condiciones resuelven al menos el 94\% de las tareas en la suite reservada, en cada modelo.
+La Tabla~\ref{tab:pass} reporta pass@2 y pass@4. Con cuatro repeticiones, pass@4 es cercano a 1 en todas las condiciones, así que no discrimina.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figuras/tasas.pdf}
+\caption{Tasa de resolución en la suite reservada por condición y modelo, con IC95\% sobre tareas. El eje vertical empieza en 0,85.}
+\label{fig:tasas}
+\end{figure}
+
+\begin{table}[t]
+\centering
+\caption{pass@1, pass@2 y pass@4 por modelo y condición (n = 4 repeticiones por tarea; la fila agregada usa n = 8).}
+\label{tab:pass}
+\input{tablas/pass}
+\end{table}
+
+\subsection{Iteraciones, coste y tokens (H2)}
+La razón de medianas de tokens C/B es 1,04 [0,91; 1,37], y cumple el criterio de 2. Las iteraciones confirman el punto anterior: A y B hicieron exactamente una llamada por episodio. C reintentó en 18 de 400 episodios, con 30 llamadas adicionales en total, y 4 episodios de C se truncaron por el tope de tokens.
+La Tabla~\ref{tab:costo} resume tokens, iteraciones y coste. El coste total del experimento fue de 1,18 USD a precio de lista; por solución correcta, C cuesta 0,00111 USD frente a 0,00095 de B.
+
+\begin{table}[t]
+\centering
+\caption{Tokens (medianas por episodio), iteraciones medias y coste por condición, sumando ambos modelos.}
+\label{tab:costo}
+\input{tablas/costo}
+\end{table}
 
 \subsection{Mutación (H3)}
 La suite del bucle de C detecta el 69,6\% de 666 mutantes no equivalentes con familias de eliminación, intercambio y adición de compuertas,
-frente al 0\% de la comprobación de solo ejecución. Esto mide la fuerza de la suite, no el efecto sobre los modelos.
+frente al 0\% de la comprobación de solo ejecución (Tabla~\ref{tab:h3}). Esto mide la fuerza de la suite, no el efecto sobre los modelos.
+
+\begin{table}[t]
+\centering
+\caption{Puntuación de mutación de la suite del bucle de C frente a la línea base de B (solo ejecución).}
+\label{tab:h3}
+\input{tablas/h3}
+\end{table}
 
 \section{Discusión}
 El resultado principal es negativo. El efecto techo explica buena parte de la diferencia: B ya resuelve el 95\% de las tareas,
-así que la mejora máxima posible es de unos 5 puntos. El cálculo de potencia preregistrado supuso bases de 40 a 70\%.
-Un diseño con tareas más difíciles es necesario para medir un efecto de 10 puntos.
+así que la mejora máxima posible frente a B es de unos 5 puntos. El cálculo de potencia preregistrado ya advertía que el diseño,
+con 50 tareas y 4 repeticiones, tenía una potencia de 0,31 a 0,51 para detectar un efecto de 10 puntos.
 
-Un análisis exploratorio, no confirmatorio, sugiere que la ganancia de C se concentra en Bernstein-Vazirani y en QFT.
-Es una pista para un estudio de seguimiento.
+La comparación C frente a B no es un contraste entre dos bucles de reintento, porque B no reintentó nunca. Es, en la práctica,
+C frente a una pasada con comprobación de ejecución. La comparación C frente a A (+4,8 puntos) mide mejor el efecto de añadir
+reintentos guiados por verificación a una pasada.
+
+Un análisis exploratorio, no confirmatorio, sugiere que la ganancia de C se concentra en Bernstein-Vazirani y en QFT (Figura~\ref{fig:cat}).
+Es una pista para un estudio de seguimiento con tareas más difíciles.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figuras/categorias.pdf}
+\caption{Exploratorio: tasa de resolución por categoría y condición, con ambos modelos. No es confirmatorio.}
+\label{fig:cat}
+\end{figure}
 
 \section{Limitaciones}
 \begin{itemize}
 \item \textbf{Efecto techo.} Las tareas son fáciles para los modelos. La potencia real para 10 puntos es baja.
-\item \textbf{H3 por construcción.} La línea base de solo ejecución no detecta mutantes de circuito, así que la comparación es esperable.
+\item \textbf{B no reintentó.} Ningún episodio de B tuvo una segunda iteración. Por eso C$-$B no mide el efecto de los reintentos de B.
+\item \textbf{C incompleta frente al preregistro.} El bucle de C no incluye comprobaciones estáticas ni aserciones dinámicas, y la suite reservada no incluye propiedades metamórficas. No encontramos implementada la equivalencia parcial para circuitos con auxiliares. Por tanto, C es una versión reducida de su diseño.
+\item \textbf{H3 por construcción.} La línea base de solo ejecución no detecta mutantes de circuito, así que la comparación es esperable. Mide la suite, no a los modelos.
+\item \textbf{Ruido no evaluado.} Los resultados son sin ruido. El régimen con ruido despolarizante previsto en el preregistro no se ejecutó, y no existe la calibración de su umbral.
+\item \textbf{Tiempos no registrados.} El registro guarda la hora de inicio de cada llamada, pero no la latencia.
 \item \textbf{Modelos mixtos aproximados.} El GLMM es variacional y puede subestimar la incertidumbre.
 \item \textbf{Cuatro truncados} en C, que cuentan como no resueltos.
-\item \textbf{Ruido no evaluado.} Los resultados son sin ruido; el régimen con ruido no se ejecutó en esta fase.
 \item \textbf{Retención de datos.} Los proveedores retienen las peticiones 30 días para monitoreo de abuso.
 \end{itemize}
 
 \section{Conclusiones}
-Con 1\,200 episodios, la verificación en el bucle mejora la corrección de C frente a B en 3,7 puntos, por debajo del umbral preregistrado.
-El coste en tokens no aumenta de forma apreciable. El resultado negativo sobre el tamaño del efecto es el hallazgo principal.
+Con 1\,200 episodios, la verificación en el bucle mejora la corrección de C frente a B en 3,7 puntos y frente a una pasada en 4,8 puntos,
+por debajo del umbral preregistrado de 10 puntos frente a B. El coste en tokens no aumenta de forma apreciable. Como la condición B no reintentó
+y C implementa solo parte de su diseño, el resultado debe leerse como una estimación del efecto de una versión reducida de la verificación.
 
 \bibliographystyle{IEEEtran}
 \bibliography{referencias}

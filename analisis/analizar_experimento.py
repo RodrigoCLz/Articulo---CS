@@ -7,10 +7,13 @@ Unidad de análisis: la tarea (D-03). pass@1 por tarea = aciertos / repeticiones
   Secundarias C − A y B − A con corrección de Holm.
 - H2: razón de medianas de tokens totales (C / B) por tarea, con IC95% bootstrap sobre tareas.
   Apoyo si ≤ 2,0.
-- H3: no se calcula aquí (requiere evaluar mutantes sobre el código final). Ver analisis/PENDIENTE.
+- H3: se calcula en analisis/h3_mutantes.py (D-39) y aquí se incorpora desde analisis/resultados_h3.json.
 - Por modelo (D-17): soporte fuerte si se cumple H1 en ambos modelos; parcial si solo en uno.
+- Métricas complementarias (PREREGISTRO §7): pass@2 y pass@4 (estimador de Chen et al., n = 4),
+  iteraciones, tokens por tipo, costo por solución correcta y cumplimiento del preregistro.
+  Usan otra semilla de bootstrap para no alterar las cifras confirmatorias.
 
-Entrada:  resultados/experimento/episodios.csv
+Entrada:  resultados/experimento/episodios.csv y llamadas.jsonl
 Salida:   resultados/experimento/analisis.md  y  analisis/resultados_experimento.json
 
 Uso: .venv/bin/python analisis/analizar_experimento.py
@@ -20,6 +23,8 @@ from __future__ import annotations
 
 import csv
 import json
+from collections import defaultdict
+from math import comb
 from pathlib import Path
 
 import numpy as np
@@ -162,7 +167,91 @@ def analizar(filas: list[dict]) -> dict:
     return resultado
 
 
-def redactar(res: dict) -> str:
+LLAMADAS = RAIZ / "resultados" / "experimento" / "llamadas.jsonl"
+SALIDA_H3 = RAIZ / "analisis" / "resultados_h3.json"
+SEED_COMPLEMENTARIAS = SEED + 1
+
+
+def pass_at_k(n: int, c: int, k: int) -> float:
+    """Estimador insesgado de pass@k (Chen et al., 2021) con n muestras y c aciertos."""
+    if n - c < k:
+        return 1.0
+    return 1.0 - comb(n - c, k) / comb(n, k)
+
+
+def cargar_llamadas(ruta: Path = LLAMADAS) -> dict[tuple, dict]:
+    """Suma tokens por tipo y número de llamadas por episodio (tarea, condición, repetición, modelo)."""
+    acc: dict[tuple, dict] = defaultdict(lambda: {"entrada": 0, "salida": 0, "razonamiento": 0, "llamadas": 0})
+    with open(ruta, encoding="utf-8") as f:
+        for linea in f:
+            d = json.loads(linea)
+            a = acc[(d["tarea"], d["condicion"], str(d["rep"]), d["modelo"])]
+            a["entrada"] += int(d["tokens_entrada"])
+            a["salida"] += int(d["tokens_salida"])
+            a["razonamiento"] += int(d["tokens_razonamiento"])
+            a["llamadas"] += 1
+    return acc
+
+
+def complementarias(filas: list[dict], llamadas: dict[tuple, dict]) -> dict:
+    rng = np.random.default_rng(SEED_COMPLEMENTARIAS)
+    modelos = sorted({r["modelo"] for r in filas})
+    tareas = sorted({r["tarea"] for r in filas})
+    out: dict = {"pass_k": {}, "iteraciones": {}, "tokens": {}, "costo": {}, "llamadas_consistentes": None}
+
+    for m in modelos + ["agregado"]:
+        mods = modelos if m == "agregado" else [m]
+        for c in CONDICIONES:
+            for k in (1, 2, 4):
+                por_tarea = []
+                for t in tareas:
+                    s = [r for r in filas if r["tarea"] == t and r["condicion"] == c and r["modelo"] in mods]
+                    cc = sum(int(r["resuelta_heldout"]) for r in s)
+                    por_tarea.append(pass_at_k(len(s), cc, k))
+                arr = np.array(por_tarea)
+                idx = rng.integers(0, len(arr), size=(N_BOOT, len(arr)))
+                boot = arr[idx].mean(axis=1)
+                out["pass_k"][f"{m}|{c}|{k}"] = {"media": float(arr.mean()),
+                                                 "ic_lo": float(np.quantile(boot, 0.025)),
+                                                 "ic_hi": float(np.quantile(boot, 0.975))}
+
+    for m in modelos:
+        for c in CONDICIONES:
+            s = [r for r in filas if r["modelo"] == m and r["condicion"] == c]
+            it = np.array([int(r["iteraciones"]) for r in s])
+            out["iteraciones"][f"{m}|{c}"] = {"media": float(it.mean()), "maximo": int(it.max()),
+                                              "episodios_con_reintento": int((it > 1).sum()),
+                                              "n": len(s), "llamadas": int(it.sum())}
+
+    total_llamadas = sum(v["llamadas"] for v in llamadas.values())
+    total_iter = sum(int(r["iteraciones"]) for r in filas)
+    out["llamadas_consistentes"] = total_llamadas == total_iter
+    out["llamadas_total"] = total_llamadas
+
+    for c in CONDICIONES:
+        ep = [(k, v) for k, v in llamadas.items() if k[1] == c]
+        for tipo in ("entrada", "salida", "razonamiento"):
+            vals = np.array([v[tipo] for _, v in ep], dtype=float)
+            out["tokens"][f"{c}|{tipo}"] = {"mediana": float(np.median(vals)), "media": float(vals.mean())}
+        tot = np.array([v["entrada"] + v["salida"] + v["razonamiento"] for _, v in ep], dtype=float)
+        out["tokens"][f"{c}|total"] = {"mediana": float(np.median(tot)), "media": float(tot.mean())}
+
+    for c in CONDICIONES:
+        s = [r for r in filas if r["condicion"] == c]
+        coste = sum(float(r["coste_usd"]) for r in s)
+        ok = sum(int(r["resuelta_heldout"]) for r in s)
+        out["costo"][c] = {"coste_usd": coste, "resueltas": ok,
+                           "usd_por_resuelta": coste / ok if ok else float("nan")}
+    return out
+
+
+def h3_datos() -> dict | None:
+    if not SALIDA_H3.exists():
+        return None
+    return json.loads(SALIDA_H3.read_text(encoding="utf-8"))
+
+
+def redactar(res: dict, comp: dict | None = None) -> str:
     L = ["# Análisis confirmatorio (experimento)", "",
          "Generado por `analisis/analizar_experimento.py`. No editar a mano.", "",
          f"- Episodios: {res['n_episodios']}. Coste a precio de lista: {res['coste_usd']} USD.",
@@ -189,18 +278,79 @@ def redactar(res: dict) -> str:
     for k, v in res["truncados"].items():
         m, c = k.split("|")
         L.append(f"| {m} | {c} | {v} |")
-    L += ["", "## H3 (detección de mutantes)", "",
-          "**No calculado en este informe.** Requiere evaluar mutantes sobre el código final de cada episodio. Pendiente."]
+    h3 = h3_datos()
+    L += ["", "## H3 (detección de mutantes, D-39)", ""]
+    if h3:
+        L += [f"- Puntuación de la suite de C: {h3['puntuacion_C']:.3f}. Línea base de B: {h3['puntuacion_B']:.3f}.",
+              f"- Diferencia C − B: {h3['diferencia']:+.3f} [IC95% {h3['ic_lo']:+.3f}, {h3['ic_hi']:+.3f}].",
+              f"- Mutantes: {h3['totales']['mutantes']} generados; {h3['totales']['equivalentes']} equivalentes excluidos; "
+              f"{h3['totales']['indeterminados']} indeterminados incluidos; {h3['totales']['no_equivalentes']} evaluados.",
+              f"- **H3: {'SE CUMPLE' if h3['H3_apoyo'] else 'NO SE CUMPLE'}** (lectura: fuerza de la suite, no efecto sobre los modelos; ver D-40)."]
+    else:
+        L.append("**No disponible.** Ejecutar `analisis/h3_mutantes.py`.")
+
+    if comp:
+        L += ["", "## Métricas complementarias (PREREGISTRO §7)", "",
+              "### pass@1, pass@2 y pass@4 (n = 4 repeticiones por tarea)", "",
+              "| Modelo | Condición | pass@1 | pass@2 | pass@4 |", "|---|---|---|---|---|"]
+        for m in sorted({k.split("|")[0] for k in comp["pass_k"]}):
+            for c in CONDICIONES:
+                celdas = []
+                for k in (1, 2, 4):
+                    v = comp["pass_k"][f"{m}|{c}|{k}"]
+                    celdas.append(f"{v['media']:.3f} [{v['ic_lo']:.3f}, {v['ic_hi']:.3f}]")
+                L.append(f"| {m} | {c} | " + " | ".join(celdas) + " |")
+        L += ["", "Por modelo, n = 4 por tarea. La fila *agregado* usa n = 8 por tarea (ambos modelos).", "",
+              "### Iteraciones por episodio", "",
+              "| Modelo | Condición | Media | Máximo | Episodios con reintento | Llamadas |", "|---|---|---|---|---|---|"]
+        for k, v in comp["iteraciones"].items():
+            m, c = k.split("|")
+            L.append(f"| {m} | {c} | {v['media']:.3f} | {v['maximo']} | {v['episodios_con_reintento']} de {v['n']} | {v['llamadas']} |")
+        L += ["", f"Llamadas en `llamadas.jsonl`: {comp['llamadas_total']}. "
+              f"Coinciden con la suma de iteraciones: {'sí' if comp['llamadas_consistentes'] else 'NO'}.",
+              "", "### Tokens por episodio (suma de todas las llamadas del episodio, ambos modelos)", "",
+              "| Condición | Entrada (mediana) | Salida (mediana) | Razonamiento (mediana) | Total (mediana) | Total (media) |",
+              "|---|---|---|---|---|---|"]
+        for c in CONDICIONES:
+            t = comp["tokens"]
+            L.append(f"| {c} | {t[c + '|entrada']['mediana']:.0f} | {t[c + '|salida']['mediana']:.0f} | "
+                     f"{t[c + '|razonamiento']['mediana']:.0f} | {t[c + '|total']['mediana']:.0f} | {t[c + '|total']['media']:.0f} |")
+        L += ["", "### Costo por solución correcta", "",
+              "| Condición | Coste total (USD) | Resueltas | USD por resuelta |", "|---|---|---|---|"]
+        for c in CONDICIONES:
+            v = comp["costo"][c]
+            L.append(f"| {c} | {v['coste_usd']:.4f} | {v['resueltas']} | {v['usd_por_resuelta']:.5f} |")
+
+    L += ["", "## Cumplimiento del preregistro", "",
+          "| Elemento (PREREGISTRO) | Estado | Nota |", "|---|---|---|",
+          "| H1 primaria y secundarias con Holm (§2, §6) | Ejecutado | Ver arriba. |",
+          "| Sensibilidad con regresión mixta y GEE (D-17) | Ejecutado | Ver `sensibilidad.md`; el mixto es bayesiano aproximado (D-41). |",
+          "| H2 con desglose de tokens y costo por resuelta (§7) | Ejecutado | Ver arriba. |",
+          "| H3 con equivalentes reportados (§7, §9) | Ejecutado | Ver `h3.md` (D-39). |",
+          "| pass@2 y pass@4 (§7) | Ejecutado | Ver arriba. |",
+          "| Iteraciones y tokens por episodio (§7) | Ejecutado | Ver arriba. |",
+          "| Potencia de H1 (§6) | Ejecutado | `analisis/potencia.md`. |",
+          "| Truncados por condición y modelo (§5, D-36) | Ejecutado | Ver tabla de truncados. |",
+          "| Tiempos por llamada y episodio (§7) | **No ejecutado** | `llamadas.jsonl` solo guarda la hora de inicio; no hay latencia. |",
+          "| Comprobaciones estáticas y aserciones dinámicas en el bucle de C (§3, §8) | **No implementado** | El bucle de C usa solo equivalencia de unitarias y chi-cuadrado. |",
+          "| Propiedades metamórficas en la suite reservada (§8) | **No implementado** | `arnes/heldout.py` solo usa referencia independiente. |",
+          "| Equivalencia parcial con auxiliares (§9) | **No encontrado** | Sin implementación en `arnes/verificacion.py`. Revisar antes de citarla. |",
+          "| Régimen con ruido despolarizante (§10) | **No ejecutado** | No hay código de ruido ni calibración del umbral (§9). |",
+          "| Reintentos de B (§3, §11) | **Hallazgo** | B nunca reintentó: 0 de 400 episodios con más de 1 iteración. |",
+          "| Presupuesto igualado B-tok (§3) | Excluido | D-06: la conclusión se limita a 'C supera a B'. |"]
     return "\n".join(L) + "\n"
 
 
 def main() -> int:
     filas = cargar()
     res = analizar(filas)
+    comp = complementarias(filas, cargar_llamadas())
+    res["complementarias"] = comp
+    texto = redactar(res, comp)
     SALIDA_MD.parent.mkdir(parents=True, exist_ok=True)
-    SALIDA_MD.write_text(redactar(res), encoding="utf-8")
+    SALIDA_MD.write_text(texto, encoding="utf-8")
     SALIDA_JSON.write_text(json.dumps(res, indent=2, ensure_ascii=False), encoding="utf-8")
-    print(redactar(res))
+    print(texto)
     return 0
 
 

@@ -100,5 +100,257 @@
     "opencode-go/gpt-6-luna|B": 0,
     "opencode-go/gpt-6-luna|C": 2
   },
-  "coste_usd": 1.1766
+  "coste_usd": 1.1766,
+  "complementarias": {
+    "pass_k": {
+      "opencode-go/claude-haiku-5-5|A|1": {
+        "media": 0.945,
+        "ic_lo": 0.9,
+        "ic_hi": 0.98
+      },
+      "opencode-go/claude-haiku-5-5|A|2": {
+        "media": 0.9866666666666667,
+        "ic_lo": 0.9733333333333334,
+        "ic_hi": 0.9966666666666667
+      },
+      "opencode-go/claude-haiku-5-5|A|4": {
+        "media": 1.0,
+        "ic_lo": 1.0,
+        "ic_hi": 1.0
+      },
+      "opencode-go/claude-haiku-5-5|B|1": {
+        "media": 0.965,
+        "ic_lo": 0.935,
+        "ic_hi": 0.99
+      },
+      "opencode-go/claude-haiku-5-5|B|2": {
+        "media": 0.9966666666666667,
+        "ic_lo": 0.99,
+        "ic_hi": 1.0
+      },
+      "opencode-go/claude-haiku-5-5|B|4": {
+        "media": 1.0,
+        "ic_lo": 1.0,
+        "ic_hi": 1.0
+      },
+      "opencode-go/claude-haiku-5-5|C|1": {
+        "media": 0.99,
+        "ic_lo": 0.975,
+        "ic_hi": 1.0
+      },
+      "opencode-go/claude-haiku-5-5|C|2": {
+        "media": 1.0,
+        "ic_lo": 1.0,
+        "ic_hi": 1.0
+      },
+      "opencode-go/claude-haiku-5-5|C|4": {
+        "media": 1.0,
+        "ic_lo": 1.0,
+        "ic_hi": 1.0
+      },
+      "opencode-go/gpt-6-luna|A|1": {
+        "media": 0.94,
+        "ic_lo": 0.89,
+        "ic_hi": 0.98
+      },
+      "opencode-go/gpt-6-luna|A|2": {
+        "media": 0.98,
+        "ic_lo": 0.9533333333333335,
+        "ic_hi": 0.9966666666666667
+      },
+      "opencode-go/gpt-6-luna|A|4": {
+        "media": 1.0,
+        "ic_lo": 1.0,
+        "ic_hi": 1.0
+      },
+      "opencode-go/gpt-6-luna|B|1": {
+        "media": 0.94,
+        "ic_lo": 0.885,
+        "ic_hi": 0.98
+      },
+      "opencode-go/gpt-6-luna|B|2": {
+        "media": 0.9733333333333334,
+        "ic_lo": 0.93,
+        "ic_hi": 1.0
+      },
+      "opencode-go/gpt-6-luna|B|4": {
+        "media": 0.98,
+        "ic_lo": 0.94,
+        "ic_hi": 1.0
+      },
+      "opencode-go/gpt-6-luna|C|1": {
+        "media": 0.99,
+        "ic_lo": 0.975,
+        "ic_hi": 1.0
+      },
+      "opencode-go/gpt-6-luna|C|2": {
+        "media": 1.0,
+        "ic_lo": 1.0,
+        "ic_hi": 1.0
+      },
+      "opencode-go/gpt-6-luna|C|4": {
+        "media": 1.0,
+        "ic_lo": 1.0,
+        "ic_hi": 1.0
+      },
+      "agregado|A|1": {
+        "media": 0.9425,
+        "ic_lo": 0.9075,
+        "ic_hi": 0.9725
+      },
+      "agregado|A|2": {
+        "media": 0.9885714285714287,
+        "ic_lo": 0.9778571428571429,
+        "ic_hi": 0.9964285714285716
+      },
+      "agregado|A|4": {
+        "media": 0.9997142857142858,
+        "ic_lo": 0.9991428571428571,
+        "ic_hi": 1.0
+      },
+      "agregado|B|1": {
+        "media": 0.9525,
+        "ic_lo": 0.9225,
+        "ic_hi": 0.9775
+      },
+      "agregado|B|2": {
+        "media": 0.9928571428571429,
+        "ic_lo": 0.9828571428571429,
+        "ic_hi": 0.9992857142857143
+      },
+      "agregado|B|4": {
+        "media": 0.9997142857142858,
+        "ic_lo": 0.9991428571428571,
+        "ic_hi": 1.0
+      },
+      "agregado|C|1": {
+        "media": 0.99,
+        "ic_lo": 0.9775,
+        "ic_hi": 1.0
+      },
+      "agregado|C|2": {
+        "media": 0.9992857142857143,
+        "ic_lo": 0.9978571428571429,
+        "ic_hi": 1.0
+      },
+      "agregado|C|4": {
+        "media": 1.0,
+        "ic_lo": 1.0,
+        "ic_hi": 1.0
+      }
+    },
+    "iteraciones": {
+      "opencode-go/claude-haiku-5-5|A": {
+        "media": 1.0,
+        "maximo": 1,
+        "episodios_con_reintento": 0,
+        "n": 200,
+        "llamadas": 200
+      },
+      "opencode-go/claude-haiku-5-5|B": {
+        "media": 1.0,
+        "maximo": 1,
+        "episodios_con_reintento": 0,
+        "n": 200,
+        "llamadas": 200
+      },
+      "opencode-go/claude-haiku-5-5|C": {
+        "media": 1.08,
+        "maximo": 5,
+        "episodios_con_reintento": 10,
+        "n": 200,
+        "llamadas": 216
+      },
+      "opencode-go/gpt-6-luna|A": {
+        "media": 1.0,
+        "maximo": 1,
+        "episodios_con_reintento": 0,
+        "n": 200,
+        "llamadas": 200
+      },
+      "opencode-go/gpt-6-luna|B": {
+        "media": 1.0,
+        "maximo": 1,
+        "episodios_con_reintento": 0,
+        "n": 200,
+        "llamadas": 200
+      },
+      "opencode-go/gpt-6-luna|C": {
+        "media": 1.07,
+        "maximo": 5,
+        "episodios_con_reintento": 8,
+        "n": 200,
+        "llamadas": 214
+      }
+    },
+    "tokens": {
+      "A|entrada": {
+        "mediana": 134.5,
+        "media": 141.52
+      },
+      "A|salida": {
+        "mediana": 808.5,
+        "media": 1082.8225
+      },
+      "A|razonamiento": {
+        "mediana": 516.0,
+        "media": 767.1975
+      },
+      "A|total": {
+        "mediana": 1496.5,
+        "media": 1991.54
+      },
+      "B|entrada": {
+        "mediana": 134.5,
+        "media": 141.52
+      },
+      "B|salida": {
+        "mediana": 863.5,
+        "media": 1043.52
+      },
+      "B|razonamiento": {
+        "mediana": 516.0,
+        "media": 732.4525
+      },
+      "B|total": {
+        "mediana": 1545.0,
+        "media": 1917.4925
+      },
+      "C|entrada": {
+        "mediana": 137.0,
+        "media": 171.595
+      },
+      "C|salida": {
+        "mediana": 897.0,
+        "media": 1251.87
+      },
+      "C|razonamiento": {
+        "mediana": 543.0,
+        "media": 914.415
+      },
+      "C|total": {
+        "mediana": 1622.0,
+        "media": 2337.88
+      }
+    },
+    "costo": {
+      "A": {
+        "coste_usd": 0.375657,
+        "resueltas": 377,
+        "usd_por_resuelta": 0.0009964376657824933
+      },
+      "B": {
+        "coste_usd": 0.360857,
+        "resueltas": 381,
+        "usd_por_resuelta": 0.0009471312335958005
+      },
+      "C": {
+        "coste_usd": 0.440119,
+        "resueltas": 396,
+        "usd_por_resuelta": 0.0011114116161616162
+      }
+    },
+    "llamadas_consistentes": true,
+    "llamadas_total": 1230
+  }
 }

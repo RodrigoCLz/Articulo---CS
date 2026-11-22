@@ -321,6 +321,19 @@ Regla: ningún cambio a una decisión aprobada se aplica después de congelar el
 - **Motivo:** "dynamic assertions" tiene un sentido técnico (aserciones dentro del circuito) que el bucle no implementa; "mutation testing" es solo la evaluación de H3, no un componente del agente; y el título anterior sugería un efecto que H1 no confirmó.
 - **Estado:** APROBADA por el usuario.
 
+### D-43 · Auditoría de completitud del análisis y desviaciones del preregistro (2026-11-22)
+- **Motivo:** el usuario pidió comprobar si el análisis estaba completo. Se contrastó `PREREGISTRO.md` (§2 a §12) con el código y los datos.
+- **Regenerado:** `resultados/experimento/analisis.md` incluye ahora H3 (desde `analisis/resultados_h3.json`), pass@2 y pass@4, iteraciones, tokens por tipo, coste por resuelta y una tabla de cumplimiento. Las cifras de H1 y H2 no cambian.
+- **Hallazgo 1:** B nunca reintentó. Sus 400 episodios terminan en la primera iteración. C−B no mide el efecto de reintentos de B. Se declara en el artículo.
+- **Hallazgo 2:** el bucle de C no implementa comprobaciones estáticas ni aserciones dinámicas (§3, §8). Solo implementa equivalencia de unitarias y chi-cuadrado.
+- **Hallazgo 3:** la suite reservada no implementa propiedades metamórficas (§8).
+- **Hallazgo 4:** no se encontró equivalencia parcial para circuitos con auxiliares (§9).
+- **Hallazgo 5:** el régimen con ruido despolarizante (§10) no se ejecutó, y no existe la calibración del umbral (§9).
+- **Hallazgo 6:** no se registraron tiempos por llamada (§7). `llamadas.jsonl` solo guarda la hora de inicio.
+- **Decisión:** no se reejecuta ni se cambia el diseño después de ver los datos. Las desviaciones se declaran en el artículo (Limitaciones). Cualquier implementación de lo que falta se haría como estudio de seguimiento, con su propio preregistro.
+- **Figuras y tablas:** `analisis/figuras.py` genera `paper/figuras/*.pdf` y `paper/tablas/*.tex`. El artículo las incluye con `\input` e `\includegraphics`.
+- **Estado:** APLICADA; pendiente de aprobación del usuario para las desviaciones.
+
 ## Pendientes para congelar `prereg-v1`
 
 | ID | Punto | Quién |
