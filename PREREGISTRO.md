@@ -1,6 +1,6 @@
 # PREREGISTRO
 
-**Título tentativo:** Verification-in-the-Loop LLM Agents for Quantum Code Generation: An Empirical Study with Dynamic Assertions and Mutation Testing
+**Título:** Verification Feedback for LLM Agents Generating Quantum Circuits: A Pre-registered Study with Negative Results on Effect Size (D-42; sustituye al título tentativo anterior).
 
 **Estado:** BORRADOR. No congelado. No ejecutar ningún experimento antes de congelar.
 

@@ -315,6 +315,12 @@ Regla: ningún cambio a una decisión aprobada se aplica después de congelar el
 - **Archivos:** `analisis/sensibilidad_mixta.py`, `resultados/experimento/sensibilidad.md`. `requirements.lock.txt` añade `statsmodels`.
 - **Estado:** RESULTADO REGISTRADO. Análisis de la Fase 7 completo.
 
+### D-42 · Título del artículo (2026-11-22)
+- **Anterior:** "Verification-in-the-Loop LLM Agents for Quantum Code Generation: An Empirical Study with Dynamic Assertions and Mutation Testing".
+- **Nuevo (aprobado por el usuario):** "Verification Feedback for LLM Agents Generating Quantum Circuits: A Pre-registered Study with Negative Results on Effect Size".
+- **Motivo:** "dynamic assertions" tiene un sentido técnico (aserciones dentro del circuito) que el bucle no implementa; "mutation testing" es solo la evaluación de H3, no un componente del agente; y el título anterior sugería un efecto que H1 no confirmó.
+- **Estado:** APROBADA por el usuario.
+
 ## Pendientes para congelar `prereg-v1`
 
 | ID | Punto | Quién |

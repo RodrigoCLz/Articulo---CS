@@ -1,0 +1,131 @@
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+\usepackage[spanish,es-noshorthands]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{cite}
+\usepackage{url}
+
+\begin{document}
+
+\title{Verification Feedback for LLM Agents Generating Quantum Circuits:\\ A Pre-registered Study with Negative Results on Effect Size}
+
+\author{\IEEEauthorblockN{[VERIFICAR: nombre de la autora o autor]}
+\IEEEauthorblockA{[VERIFICAR: afiliación]\\
+[VERIFICAR: correo]}}
+
+\maketitle
+
+\begin{abstract}
+Los agentes basados en modelos de lenguaje generan circuitos cuánticos con frecuencia, pero no siempre están
+correctos. Estudiamos si la retroalimentación de verificación en el bucle mejora la corrección frente a
+un bucle que solo recibe errores de ejecución. Comparamos tres condiciones, con preregistro: una pasada (A),
+reintentos con errores de ejecución (B) y reintentos con pruebas de verificación (C). Evaluamos 50 tareas
+propias, dos modelos y cuatro repeticiones, con 1\,200 episodios evaluados en una suite reservada.
+La verificación mejora la corrección de C frente a B en 3,7 puntos porcentuales (IC95\% [1,3; 6,8]),
+por debajo del umbral preregistrado de 10 puntos. El coste en tokens de C frente a B es similar (razón de
+medianas 1,04). La suite de verificación detecta el 69,6\% de los mutantes no equivalentes, frente al 0\% de
+la comprobación de solo ejecución. El efecto techo explica buena parte del resultado: B ya resuelve el 95\% de
+las tareas. Declaramos el resultado negativo y sus límites.
+\end{abstract}
+
+\begin{IEEEkeywords}
+computación cuántica, modelos de lenguaje, generación de código, verificación, pruebas de mutación, preregistro
+\end{IEEEkeywords}
+
+\section{Introducción}
+La generación de código cuántico con modelos de lenguaje es un campo en crecimiento~\cite{qiskit_humaneval, qhackbench}.
+Los errores de código cuántico son frecuentes y muchos son específicos de la computación cuántica~\cite{bugs_saner}.
+Un error de fase o de compuerta puede pasar la ejecución sin fallar, y solo se detecta comparando la
+distribución de salida o la unitaria con una referencia~\cite{quito, quratest}.
+
+Preguntamos si un agente que verifica su propio código mejora la corrección frente a un agente que solo
+recibe errores de ejecución. Nuestro aporte es un diseño preregistrado, un arnés reproducible y un resultado
+negativo sobre el tamaño del efecto. No afirmamos novedad absoluta: trabajos cercanos combinan LLM y
+evaluación en bucle en otros dominios~\cite{funsearch} o en código cuántico con contexto multiagente~\cite{multiagente_qec}.
+
+\section{Trabajo relacionado}
+Los benchmarks de código cuántico para LLM usan tareas públicas~\cite{qiskit_humaneval, qhackbench}.
+Chang et al.~\cite{chang_survey} documentan el riesgo de contaminación de benchmarks estáticos y públicos.
+Para pruebas de programas cuánticos, Quito~\cite{quito} usa oráculos de salida inválida y de distribución,
+y QuSBT~\cite{qusbt} usa chi-cuadrado sobre distribuciones. QuraTest~\cite{quratest} evalúa con puntuación de
+mutación. Wang et al.~\cite{wang_tse} señalan el problema del oráculo de prueba para LLM.
+Para equivalencia de circuitos, Wei et al.~\cite{wei_dac} y Peham et al.~\cite{peham_aspdac} proponen métodos exactos con límites de escala.
+
+\section{Método}
+\subsection{Condiciones}
+\begin{itemize}
+\item \textbf{A}: una sola pasada, sin retroalimentación.
+\item \textbf{B}: reintentos hasta que el código ejecuta con el número de qubits correcto. La retroalimentación es el error de ejecución.
+\item \textbf{C}: reintentos hasta que pasa las pruebas del bucle: equivalencia de unitarias (hasta 8 qubits, tolerancia $10^{-8}$ módulo fase global), chi-cuadrado sobre distribuciones (8\,192 shots, $\alpha = 0{,}01$) y ejecución. La retroalimentación indica qué prueba falló.
+\end{itemize}
+Todas las condiciones usan el mismo prompt base, los mismos modelos, la variante de razonamiento \texttt{medium} y un máximo de cinco iteraciones.
+Un episodio que supera 20\,000 tokens se trunca y cuenta como no resuelto (desviación registrada en el preregistro).
+
+\subsection{Tareas y modelos}
+Usamos 50 tareas propias en 10 categorías (Bell/GHZ, Deutsch-Jozsa, Bernstein-Vazirani, Grover, QFT, teleportación,
+superdense coding, QPE, un ansatz variacional y QAOA), con 2 tareas pequeñas, 2 medianas y 1 grande por categoría.
+Los modelos son \texttt{gpt-6-luna} y \texttt{claude-haiku-5-5}, accedidos a través de OpenCode Go. Hay cuatro repeticiones por tarea y condición.
+La evaluación usa una suite reservada con otra semilla y 16\,384 shots. Para QFT, la referencia es la transformada discreta de Fourier calculada desde su definición.
+Las tareas variacionales y QAOA no tienen referencia independiente, y se declara.
+
+\subsection{Análisis}
+La unidad de análisis es la tarea. Usamos bootstrap pareado sobre tareas con 10\,000 remuestreos, corrección de Holm
+en las secundarias, y dos modelos de sensibilidad: logística mixta con efecto aleatorio por tarea (aproximación variacional)
+y GEE logístico con estructura intercambiable.
+
+\section{Resultados}
+\subsection{Corrección (H1)}
+La Tabla~\ref{tab:h1} resume las comparaciones pareadas. El efecto de C frente a B es de 3,7 puntos, con IC95\% [1,3; 6,8].
+No se cumple el criterio de 10 puntos. Los dos modelos de sensibilidad dan un efecto de 4 puntos.
+
+\begin{table}[t]
+\centering
+\caption{Diferencias de pass@1 entre condiciones (agregado sobre modelos).}
+\label{tab:h1}
+\begin{tabular}{lccc}
+\toprule
+Comparación & Diferencia & IC95\% & p (Holm) \\
+\midrule
+C $-$ B (primaria) & $+0{,}037$ & $[+0{,}013; +0{,}068]$ & --- \\
+C $-$ A & $+0{,}048$ & $[+0{,}018; +0{,}080]$ & $0{,}002$ \\
+B $-$ A & $+0{,}010$ & $[-0{,}018; +0{,}037]$ & $0{,}544$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Coste (H2)}
+La razón de medianas de tokens C/B es 1,04 [0,91; 1,37]. Cumple el criterio de 2. El coste total del experimento fue de 1,18 USD a precio de lista.
+
+\subsection{Mutación (H3)}
+La suite del bucle de C detecta el 69,6\% de 666 mutantes no equivalentes con familias de eliminación, intercambio y adición de compuertas,
+frente al 0\% de la comprobación de solo ejecución. Esto mide la fuerza de la suite, no el efecto sobre los modelos.
+
+\section{Discusión}
+El resultado principal es negativo. El efecto techo explica buena parte de la diferencia: B ya resuelve el 95\% de las tareas,
+así que la mejora máxima posible es de unos 5 puntos. El cálculo de potencia preregistrado supuso bases de 40 a 70\%.
+Un diseño con tareas más difíciles es necesario para medir un efecto de 10 puntos.
+
+Un análisis exploratorio, no confirmatorio, sugiere que la ganancia de C se concentra en Bernstein-Vazirani y en QFT.
+Es una pista para un estudio de seguimiento.
+
+\section{Limitaciones}
+\begin{itemize}
+\item \textbf{Efecto techo.} Las tareas son fáciles para los modelos. La potencia real para 10 puntos es baja.
+\item \textbf{H3 por construcción.} La línea base de solo ejecución no detecta mutantes de circuito, así que la comparación es esperable.
+\item \textbf{Modelos mixtos aproximados.} El GLMM es variacional y puede subestimar la incertidumbre.
+\item \textbf{Cuatro truncados} en C, que cuentan como no resueltos.
+\item \textbf{Ruido no evaluado.} Los resultados son sin ruido; el régimen con ruido no se ejecutó en esta fase.
+\item \textbf{Retención de datos.} Los proveedores retienen las peticiones 30 días para monitoreo de abuso.
+\end{itemize}
+
+\section{Conclusiones}
+Con 1\,200 episodios, la verificación en el bucle mejora la corrección de C frente a B en 3,7 puntos, por debajo del umbral preregistrado.
+El coste en tokens no aumenta de forma apreciable. El resultado negativo sobre el tamaño del efecto es el hallazgo principal.
+
+\bibliographystyle{IEEEtran}
+\bibliography{referencias}
+
+\end{document}
