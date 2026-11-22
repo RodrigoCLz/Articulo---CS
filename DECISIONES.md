@@ -293,6 +293,22 @@ Regla: ningún cambio a una decisión aprobada se aplica después de congelar el
 - **Script:** `analisis/analizar_experimento.py` → `resultados/experimento/analisis.md`.
 - **Estado:** RESULTADO REGISTRADO.
 
+### D-39 · Definición de H3 (desviación registrada, 2026-11-22)
+- **Motivo:** el preregistro no definía H3 con precisión. Comparar la detección de mutantes de C con la de B da ~0 % para B, porque B solo comprueba que el código ejecuta, y no mide la calidad de las aserciones.
+- **Definición:** H3 mide la **suite de pruebas del bucle de C** sobre **mutantes de referencia de las familias H3** (eliminar compuerta, intercambiar qubits, añadir compuerta). Las familias del bucle no se usan aquí, porque C las vería durante su ejecución.
+- **Muestra:** 6 mutantes por familia y tarea (18 por tarea, semilla 20261121), sobre las 50 tareas. Los mutantes equivalentes se excluyen; se reporta cuántos quedan en cada grupo.
+- **Línea base:** la comprobación de solo ejecución de B. Se reporta como dato, no como comparación formal.
+- **Criterio:** se mantienen el umbral de 10 pp y el IC95% > 0, con bootstrap sobre tareas. Si la línea base superara el 90 %, H3 se declararía no evaluable. Con la definición actual, la línea base esperada es cercana a 0 %.
+- **Coste:** sin llamadas a modelos.
+- **Estado:** APROBADA por el usuario (2026-11-22), registrada antes de calcularla.
+
+### D-40 · Resultado de H3 y análisis exploratorio (2026-11-22)
+- **H3 (según D-39):** 730 mutantes de familias H3 (64 equivalentes excluidos, 18 indeterminados incluidos). Puntuación de la suite de C: **0,696**. Línea base de B: **0,000**. Diferencia +0,696, IC95% [+0,583; +0,802]. **Se cumple** el criterio (≥ 0,10, IC inferior > 0).
+- **Lectura obligada:** H3 mide la fuerza de la suite del bucle, no el efecto de C sobre los modelos. Es una propiedad de la verificación, y no sustituye a H1. La comparación con B es con una línea base que nunca detecta mutantes de circuito, así que el resultado es esperable por construcción. Se declara así en el artículo.
+- **Exploratorio (no confirmatorio):** la ganancia de C sobre A y B se concentra en Bernstein-Vazirani (Haiku A 15/20, B 14/20, C 19/20) y QFT (GPT-6 Luna A 10/20, B 10/20, C 19/20). Las demás categorías están cerca del techo. Es una pista para un estudio de seguimiento, no una conclusión.
+- **Archivos:** `resultados/experimento/h3.md`, `analisis/resultados_h3.json`, `resultados/experimento/exploratorio_categorias.md`.
+- **Estado:** RESULTADOS REGISTRADOS. Análisis de sensibilidad (regresión mixta, D-17) pendiente.
+
 ## Pendientes para congelar `prereg-v1`
 
 | ID | Punto | Quién |

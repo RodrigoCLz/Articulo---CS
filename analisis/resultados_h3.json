@@ -1,0 +1,467 @@
+{
+  "puntuacion_C": 0.6961538184038184,
+  "puntuacion_B": 0.0,
+  "diferencia": 0.6961538184038184,
+  "ic_lo": 0.5829650523088024,
+  "ic_hi": 0.8023187028249528,
+  "evaluable": true,
+  "H3_apoyo": true,
+  "totales": {
+    "mutantes": 730,
+    "equivalentes": 64,
+    "indeterminados": 18,
+    "no_equivalentes": 666
+  },
+  "por_tarea": [
+    {
+      "tarea": "A1",
+      "categoria": "bell_ghz",
+      "no_equivalentes": 9,
+      "detectados_C": 8,
+      "detectados_B": 0,
+      "equivalentes": 0,
+      "indeterminados": 0
+    },
+    {
+      "tarea": "A2",
+      "categoria": "bell_ghz",
+      "no_equivalentes": 10,
+      "detectados_C": 7,
+      "detectados_B": 0,
+      "equivalentes": 0,
+      "indeterminados": 0
+    },
+    {
+      "tarea": "A3",
+      "categoria": "bell_ghz",
+      "no_equivalentes": 11,
+      "detectados_C": 11,
+      "detectados_B": 0,
+      "equivalentes": 0,
+      "indeterminados": 0
+    },
+    {
+      "tarea": "A4",
+      "categoria": "bell_ghz",
+      "no_equivalentes": 13,
+      "detectados_C": 13,
+      "detectados_B": 0,
+      "equivalentes": 0,
+      "indeterminados": 0
+    },
+    {
+      "tarea": "A5",
+      "categoria": "bell_ghz",
+      "no_equivalentes": 18,
+      "detectados_C": 17,
+      "detectados_B": 0,
+      "equivalentes": 0,
+      "indeterminados": 0
+    },
+    {
+      "tarea": "B1",
+      "categoria": "deutsch_jozsa",
+      "no_equivalentes": 12,
+      "detectados_C": 10,
+      "detectados_B": 0,
+      "equivalentes": 0,
+      "indeterminados": 0
+    },
+    {
+      "tarea": "B2",
+      "categoria": "deutsch_jozsa",
+      "no_equivalentes": 11,
+      "detectados_C": 8,
+      "detectados_B": 0,
+      "equivalentes": 0,
+      "indeterminados": 0
+    },
+    {
+      "tarea": "B3",
+      "categoria": "deutsch_jozsa",
+      "no_equivalentes": 14,
+      "detectados_C": 10,
+      "detectados_B": 0,
+      "equivalentes": 0,
+      "indeterminados": 0
+    },
+    {
+      "tarea": "B4",
+      "categoria": "deutsch_jozsa",
+      "no_equivalentes": 12,
+      "detectados_C": 8,
+      "detectados_B": 0,
+      "equivalentes": 0,
+      "indeterminados": 0
+    },
+    {
+      "tarea": "B5",
+      "categoria": "deutsch_jozsa",
+      "no_equivalentes": 18,
+      "detectados_C": 18,
+      "detectados_B": 0,
+      "equivalentes": 0,
+      "indeterminados": 0
+    },
+    {
+      "tarea": "C1",
+      "categoria": "bernstein_vazirani",
+      "no_equivalentes": 13,
+      "detectados_C": 12,
+      "detectados_B": 0,
+      "equivalentes": 0,
+      "indeterminados": 0
+    },
+    {
+      "tarea": "C2",
+      "categoria": "bernstein_vazirani",
+      "no_equivalentes": 12,
+      "detectados_C": 10,
+      "detectados_B": 0,
+      "equivalentes": 0,
+      "indeterminados": 0
+    },
+    {
+      "tarea": "C3",
+      "categoria": "bernstein_vazirani",
+      "no_equivalentes": 15,
+      "detectados_C": 12,
+      "detectados_B": 0,
+      "equivalentes": 0,
+      "indeterminados": 0
+    },
+    {
+      "tarea": "C4",
+      "categoria": "bernstein_vazirani",
+      "no_equivalentes": 15,
+      "detectados_C": 11,
+      "detectados_B": 0,
+      "equivalentes": 0,
+      "indeterminados": 0
+    },
+    {
+      "tarea": "C5",
+      "categoria": "bernstein_vazirani",
+      "no_equivalentes": 16,
+      "detectados_C": 15,
+      "detectados_B": 0,
+      "equivalentes": 0,
+      "indeterminados": 0
+    },
+    {
+      "tarea": "D1",
+      "categoria": "grover",
+      "no_equivalentes": 14,
+      "detectados_C": 0,
+      "detectados_B": 0,
+      "equivalentes": 0,
+      "indeterminados": 0
+    },
+    {
+      "tarea": "D2",
+      "categoria": "grover",
+      "no_equivalentes": 14,
+      "detectados_C": 0,
+      "detectados_B": 0,
+      "equivalentes": 0,
+      "indeterminados": 0
+    },
+    {
+      "tarea": "D3",
+      "categoria": "grover",
+      "no_equivalentes": 12,
+      "detectados_C": 12,
+      "detectados_B": 0,
+      "equivalentes": 0,
+      "indeterminados": 0
+    },
+    {
+      "tarea": "D4",
+      "categoria": "grover",
+      "no_equivalentes": 12,
+      "detectados_C": 12,
+      "detectados_B": 0,
+      "equivalentes": 0,
+      "indeterminados": 0
+    },
+    {
+      "tarea": "D5",
+      "categoria": "grover",
+      "no_equivalentes": 12,
+      "detectados_C": 11,
+      "detectados_B": 0,
+      "equivalentes": 0,
+      "indeterminados": 0
+    },
+    {
+      "tarea": "E1",
+      "categoria": "qft",
+      "no_equivalentes": 10,
+      "detectados_C": 10,
+      "detectados_B": 0,
+      "equivalentes": 1,
+      "indeterminados": 0
+    },
+    {
+      "tarea": "E2",
+      "categoria": "qft",
+      "no_equivalentes": 9,
+      "detectados_C": 9,
+      "detectados_B": 0,
+      "equivalentes": 1,
+      "indeterminados": 0
+    },
+    {
+      "tarea": "E3",
+      "categoria": "qft",
+      "no_equivalentes": 12,
+      "detectados_C": 12,
+      "detectados_B": 0,
+      "equivalentes": 3,
+      "indeterminados": 0
+    },
+    {
+      "tarea": "E4",
+      "categoria": "qft",
+      "no_equivalentes": 12,
+      "detectados_C": 12,
+      "detectados_B": 0,
+      "equivalentes": 6,
+      "indeterminados": 0
+    },
+    {
+      "tarea": "E5",
+      "categoria": "qft",
+      "no_equivalentes": 12,
+      "detectados_C": 12,
+      "detectados_B": 0,
+      "equivalentes": 6,
+      "indeterminados": 0
+    },
+    {
+      "tarea": "F1",
+      "categoria": "teleportacion",
+      "no_equivalentes": 15,
+      "detectados_C": 13,
+      "detectados_B": 0,
+      "equivalentes": 1,
+      "indeterminados": 0
+    },
+    {
+      "tarea": "F2",
+      "categoria": "teleportacion",
+      "no_equivalentes": 15,
+      "detectados_C": 13,
+      "detectados_B": 0,
+      "equivalentes": 1,
+      "indeterminados": 0
+    },
+    {
+      "tarea": "F3",
+      "categoria": "teleportacion",
+      "no_equivalentes": 15,
+      "detectados_C": 11,
+      "detectados_B": 0,
+      "equivalentes": 1,
+      "indeterminados": 0
+    },
+    {
+      "tarea": "F4",
+      "categoria": "teleportacion",
+      "no_equivalentes": 15,
+      "detectados_C": 15,
+      "detectados_B": 0,
+      "equivalentes": 1,
+      "indeterminados": 0
+    },
+    {
+      "tarea": "F5",
+      "categoria": "teleportacion",
+      "no_equivalentes": 18,
+      "detectados_C": 13,
+      "detectados_B": 0,
+      "equivalentes": 0,
+      "indeterminados": 18
+    },
+    {
+      "tarea": "G1",
+      "categoria": "superdense",
+      "no_equivalentes": 12,
+      "detectados_C": 0,
+      "detectados_B": 0,
+      "equivalentes": 0,
+      "indeterminados": 0
+    },
+    {
+      "tarea": "G2",
+      "categoria": "superdense",
+      "no_equivalentes": 13,
+      "detectados_C": 0,
+      "detectados_B": 0,
+      "equivalentes": 0,
+      "indeterminados": 0
+    },
+    {
+      "tarea": "G3",
+      "categoria": "superdense",
+      "no_equivalentes": 16,
+      "detectados_C": 0,
+      "detectados_B": 0,
+      "equivalentes": 0,
+      "indeterminados": 0
+    },
+    {
+      "tarea": "G4",
+      "categoria": "superdense",
+      "no_equivalentes": 18,
+      "detectados_C": 0,
+      "detectados_B": 0,
+      "equivalentes": 0,
+      "indeterminados": 0
+    },
+    {
+      "tarea": "G5",
+      "categoria": "superdense",
+      "no_equivalentes": 18,
+      "detectados_C": 0,
+      "detectados_B": 0,
+      "equivalentes": 0,
+      "indeterminados": 0
+    },
+    {
+      "tarea": "H1",
+      "categoria": "qpe",
+      "no_equivalentes": 12,
+      "detectados_C": 0,
+      "detectados_B": 0,
+      "equivalentes": 3,
+      "indeterminados": 0
+    },
+    {
+      "tarea": "H2",
+      "categoria": "qpe",
+      "no_equivalentes": 12,
+      "detectados_C": 0,
+      "detectados_B": 0,
+      "equivalentes": 3,
+      "indeterminados": 0
+    },
+    {
+      "tarea": "H3",
+      "categoria": "qpe",
+      "no_equivalentes": 12,
+      "detectados_C": 0,
+      "detectados_B": 0,
+      "equivalentes": 6,
+      "indeterminados": 0
+    },
+    {
+      "tarea": "H4",
+      "categoria": "qpe",
+      "no_equivalentes": 12,
+      "detectados_C": 0,
+      "detectados_B": 0,
+      "equivalentes": 6,
+      "indeterminados": 0
+    },
+    {
+      "tarea": "H5",
+      "categoria": "qpe",
+      "no_equivalentes": 12,
+      "detectados_C": 0,
+      "detectados_B": 0,
+      "equivalentes": 6,
+      "indeterminados": 0
+    },
+    {
+      "tarea": "I1",
+      "categoria": "variacional",
+      "no_equivalentes": 10,
+      "detectados_C": 10,
+      "detectados_B": 0,
+      "equivalentes": 0,
+      "indeterminados": 0
+    },
+    {
+      "tarea": "I2",
+      "categoria": "variacional",
+      "no_equivalentes": 12,
+      "detectados_C": 12,
+      "detectados_B": 0,
+      "equivalentes": 0,
+      "indeterminados": 0
+    },
+    {
+      "tarea": "I3",
+      "categoria": "variacional",
+      "no_equivalentes": 16,
+      "detectados_C": 16,
+      "detectados_B": 0,
+      "equivalentes": 0,
+      "indeterminados": 0
+    },
+    {
+      "tarea": "I4",
+      "categoria": "variacional",
+      "no_equivalentes": 18,
+      "detectados_C": 18,
+      "detectados_B": 0,
+      "equivalentes": 0,
+      "indeterminados": 0
+    },
+    {
+      "tarea": "I5",
+      "categoria": "variacional",
+      "no_equivalentes": 18,
+      "detectados_C": 18,
+      "detectados_B": 0,
+      "equivalentes": 0,
+      "indeterminados": 0
+    },
+    {
+      "tarea": "J1",
+      "categoria": "qaoa",
+      "no_equivalentes": 11,
+      "detectados_C": 11,
+      "detectados_B": 0,
+      "equivalentes": 1,
+      "indeterminados": 0
+    },
+    {
+      "tarea": "J2",
+      "categoria": "qaoa",
+      "no_equivalentes": 12,
+      "detectados_C": 12,
+      "detectados_B": 0,
+      "equivalentes": 2,
+      "indeterminados": 0
+    },
+    {
+      "tarea": "J3",
+      "categoria": "qaoa",
+      "no_equivalentes": 12,
+      "detectados_C": 12,
+      "detectados_B": 0,
+      "equivalentes": 4,
+      "indeterminados": 0
+    },
+    {
+      "tarea": "J4",
+      "categoria": "qaoa",
+      "no_equivalentes": 12,
+      "detectados_C": 12,
+      "detectados_B": 0,
+      "equivalentes": 6,
+      "indeterminados": 0
+    },
+    {
+      "tarea": "J5",
+      "categoria": "qaoa",
+      "no_equivalentes": 12,
+      "detectados_C": 12,
+      "detectados_B": 0,
+      "equivalentes": 6,
+      "indeterminados": 0
+    }
+  ]
+}
